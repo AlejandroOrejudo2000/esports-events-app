@@ -10,5 +10,10 @@ public class Controlador {
 	public String saludarMustache() {
 		return "plantilla";
 	}
+	
+	@GetMapping("/saludo")
+	public String pruebaSaludar() {
+		return "plantilla";
+	}
 
 }
