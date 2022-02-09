@@ -34,12 +34,10 @@ public class Player {
     @Column
     private String nationality;
 
-    @Column
     @ManyToOne
     private Team team;
 
-    public Player(long id, String firstName, String lastName, String nickName, String genre, int age, String nationality) {
-        Id = id;
+    public Player(String firstName, String lastName, String nickName, String genre, int age, String nationality) {        
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = nickName;

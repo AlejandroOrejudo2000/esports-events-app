@@ -23,15 +23,13 @@ public class Team {
     @Column
     private int years;
 
-    @Column
     @OneToMany(mappedBy =  "team")
     private List<Player> players;
 
-    public Team(long id, String teamName, int years, List<Player> players) {
-        Id = id;
+
+    public Team(String teamName, int years) {
         this.teamName = teamName;
         this.years = years;
-        this.players = players;
     }
 
     protected Team() {
