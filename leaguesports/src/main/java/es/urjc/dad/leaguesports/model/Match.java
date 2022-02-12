@@ -38,7 +38,5 @@ public class Match {
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }
-   
-    // TODO: Cambiar clave primaria para que Match sea una entidad debil (PK = Torneo + numPartido)
 
 }

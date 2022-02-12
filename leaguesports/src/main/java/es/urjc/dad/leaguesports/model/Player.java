@@ -110,6 +110,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player [" + nickName + " (" + firstName + " " + lastName + ")]";
+        return "Player (" + Id + ") [" + nickName + " (" + firstName + " " + lastName + ")]";
     }
 }

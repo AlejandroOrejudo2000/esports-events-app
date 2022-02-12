@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import es.urjc.dad.leaguesports.model.Match;
+import es.urjc.dad.leaguesports.model.Player;
 import es.urjc.dad.leaguesports.model.Team;
 import es.urjc.dad.leaguesports.model.Tournament;
 import es.urjc.dad.leaguesports.repositories.MatchRepository;
@@ -50,7 +51,14 @@ public class DatabaseTestController {
         tournamentRepository.save(tournament);
         matchRepository.save(match);
 
+        Player player1 = new Player("A1", "B1", "C1", "Hombre", 2, "Español");
+        Player player2 = new Player("A2", "B2", "C2", "Hombre", 2, "Español");
+        Player player3 = new Player("A3", "B3", "C3", "Hombre", 2, "Español");
+        Player player4 = new Player("A4", "B4", "C4", "Hombre", 2, "Español");
 
-
+        playerRepository.save(player1);
+        playerRepository.save(player2);
+        playerRepository.save(player3);
+        playerRepository.save(player4);
     }
 }
