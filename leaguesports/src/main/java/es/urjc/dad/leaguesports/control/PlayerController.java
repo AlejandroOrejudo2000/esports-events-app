@@ -39,13 +39,9 @@ public class PlayerController {
     @PostMapping("/jugador/nuevo")
     public String addPlayer(Model model, Player player){
 
-        System.out.println(player);
-        model.addAttribute("id", (int)player.getId());
+        System.out.println(player);        
         repository.save(player);
+        model.addAttribute("id", (int)player.getId());
         return "playercreated";
     }
-
-    //TODO: Error en el link de ver jugador creado. Id = 0.
-
-
 }

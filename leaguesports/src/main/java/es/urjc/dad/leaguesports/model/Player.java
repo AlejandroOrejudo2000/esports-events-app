@@ -106,6 +106,13 @@ public class Player {
     public void setNationality(String nationality) {
         this.nationality = nationality;
     }    
+
+    public void setTeam(Team team)
+    {
+        this.team = team;
+        team.addPlayer(this);
+    }
+
     //#endregion
 
     @Override

@@ -2,6 +2,7 @@ package es.urjc.dad.leaguesports.model;
 
 //#region External dependences
 import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,7 @@ public class Team {
     public Team(String teamName, int years) {
         this.teamName = teamName;
         this.years = years;
+        players = new ArrayList<Player>();
     }
 
     protected Team() {
@@ -69,6 +71,9 @@ public class Team {
     }
     //#endregion
 
+    public void addPlayer(Player player){
+        players.add(player);
+    }
     @Override
     public String toString() {
         return "Team [" + teamName + "]";

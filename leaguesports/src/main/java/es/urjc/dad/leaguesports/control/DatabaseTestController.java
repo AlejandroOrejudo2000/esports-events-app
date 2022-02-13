@@ -38,10 +38,26 @@ public class DatabaseTestController {
         System.out.println("Initializing DB");
         Tournament tournament = new Tournament("T1", new Date(), new Date());
         
+        Player player1 = new Player("A1", "B1", "C1", "Hombre", 2, "Español");
+        Player player2 = new Player("A2", "B2", "C2", "Hombre", 2, "Español");
+        Player player3 = new Player("A3", "B3", "C3", "Hombre", 2, "Español");
+        Player player4 = new Player("A4", "B4", "C4", "Hombre", 2, "Español");
+        
         Team team1 = new Team("Team1", 5);
         Team team2 = new Team("Team2", 12);
+
+        player1.setTeam(team1);
+        player2.setTeam(team1);
+        player3.setTeam(team2);
+
         teamRepository.save(team1);
         teamRepository.save(team2);
+
+        playerRepository.save(player1);
+        playerRepository.save(player2);
+        playerRepository.save(player3);
+        playerRepository.save(player4);
+
         Match match = new Match(team1, team2);
 
         match.setTournament(tournament);
@@ -51,14 +67,5 @@ public class DatabaseTestController {
         tournamentRepository.save(tournament);
         matchRepository.save(match);
 
-        Player player1 = new Player("A1", "B1", "C1", "Hombre", 2, "Español");
-        Player player2 = new Player("A2", "B2", "C2", "Hombre", 2, "Español");
-        Player player3 = new Player("A3", "B3", "C3", "Hombre", 2, "Español");
-        Player player4 = new Player("A4", "B4", "C4", "Hombre", 2, "Español");
-
-        playerRepository.save(player1);
-        playerRepository.save(player2);
-        playerRepository.save(player3);
-        playerRepository.save(player4);
     }
 }
