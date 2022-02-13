@@ -38,5 +38,9 @@ public class Match {
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }
+    
+    public long getId() {
+        return Id;
+    }
 
 }

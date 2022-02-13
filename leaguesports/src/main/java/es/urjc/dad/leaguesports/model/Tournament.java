@@ -56,6 +56,10 @@ public class Tournament {
     {
         matches.remove(match);
     }
+    
+    public long getId() {
+        return Id;
+    }
 
     // TODO: Añadir funcionalidad para convertir strings (input) de fechas a tipo Date.
 
