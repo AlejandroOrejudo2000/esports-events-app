@@ -2,6 +2,10 @@
 
     <p>Años: {{team.years}}</p>
     <p>Jugadores</p>
-   
+    <ul>
+        {{#team.players}}
+            <li><a href="jugador_{{id}}">{{nickName}}</a></li>
+        {{/team.players}}
+    </ul>
     
     <a href="/equipos">Volver a la lista de equipos</a>

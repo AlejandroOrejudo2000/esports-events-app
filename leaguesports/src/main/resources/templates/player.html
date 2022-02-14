@@ -3,4 +3,6 @@
     <p>Nombre: {{player.firstName}}</p>
     <p>Apellido: {{player.lastName}}</p>
     <a href="/jugadores">Volver a la lista de jugadores</a>
-
+    {{#player.team}}
+        <a href="/equipo_{{id}}">Ver equipo</a>
+    {{/player.team}}

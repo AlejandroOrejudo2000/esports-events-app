@@ -31,9 +31,13 @@ public class PlayerController {
 
         Optional<Player> player = repository.findById(id);
         if(player.isPresent()) {
-            model.addAttribute("player", player.get());
+            model.addAttribute("player", player.get());    
+            return "player";                    
         }
-        return "player";
+        else{
+            return "playernotfound";
+        }
+        
     }
 
     @PostMapping("/jugador/nuevo")
