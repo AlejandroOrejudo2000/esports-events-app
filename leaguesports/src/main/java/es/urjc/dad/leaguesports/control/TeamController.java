@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
-import es.urjc.dad.leaguesports.repositories.TeamRepository;
+import es.urjc.dad.leaguesports.services.TeamService;
 import es.urjc.dad.leaguesports.model.Team;
 
 @Controller
 public class TeamController{
 
     @Autowired
-    private TeamRepository repository;
+    private TeamService teamService;
 
     @GetMapping("/equipos")
     public String showTeams(Model model, Pageable page) {
 
-        model.addAttribute("teamlist", repository.findAll(page));
+        model.addAttribute("teamlist", teamService.getAllTeams(page));
         return "teams";
     }
 
     @GetMapping("/equipo_{id}")
     public String showTeamDetails(Model model, @PathVariable long id){
-        Optional<Team> team = repository.findById(id);
+        Optional<Team> team = teamService.getTeamById(id);
         if(team.isPresent()) {
             model.addAttribute("team", team.get());
         }
@@ -37,7 +37,7 @@ public class TeamController{
     @PostMapping("/equipo/nuevo")
     public String addTeam(Model model, Team team){
     
-        repository.save(team);
+        teamService.addTeam(team);
         model.addAttribute("id", (int)team.getId());
         return "teamcreated";
     }

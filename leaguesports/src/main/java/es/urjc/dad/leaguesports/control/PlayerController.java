@@ -11,40 +11,38 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import es.urjc.dad.leaguesports.model.Player;
-import es.urjc.dad.leaguesports.repositories.PlayerRepository;
+import es.urjc.dad.leaguesports.services.PlayerService;
 
 @Controller
 public class PlayerController {
 
     @Autowired
-    private PlayerRepository repository;
+    private PlayerService playerService;
 
     @GetMapping("/jugadores")
     public String showPlayers(Model model, Pageable page) {   
 
-        model.addAttribute("playerlist", repository.findAll(page));
+        model.addAttribute("playerlist", playerService.getAllPlayers(page));
         return "players";
     }
 
     @GetMapping("/jugador_{id}")
     public String showPlayerDetails(Model model, @PathVariable long id) {
 
-        Optional<Player> player = repository.findById(id);
+        Optional<Player> player = playerService.getPlayerById(id);
         if(player.isPresent()) {
             model.addAttribute("player", player.get());    
             return "player";                    
         }
         else{
             return "playernotfound";
-        }
-        
+        }        
     }
 
     @PostMapping("/jugador/nuevo")
     public String addPlayer(Model model, Player player){
-
-        System.out.println(player);        
-        repository.save(player);
+      
+        playerService.addPlayer(player);
         model.addAttribute("id", (int)player.getId());
         return "playercreated";
     }

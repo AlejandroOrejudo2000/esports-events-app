@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import es.urjc.dad.leaguesports.model.Tournament;
-import es.urjc.dad.leaguesports.repositories.TournamentRepository;
+import es.urjc.dad.leaguesports.services.TournamentService;
 
 @Controller
 public class TournamentController {
 
 	@Autowired
-    private TournamentRepository repository;
+    private TournamentService tournamentService;
 
     @GetMapping("/torneos")
     public String showTournaments(Model model, Pageable page) {   
 
-        model.addAttribute("tournamentList", repository.findAll(page));
+        model.addAttribute("tournamentList", tournamentService.getAllTournaments(page));
         return "tournaments";
     }
 
     @GetMapping("/torneo_{id}")
     public String showTournamentDetails(Model model, @PathVariable long id) {
 
-        Optional<Tournament> tournament = repository.findById(id);
+        Optional<Tournament> tournament = tournamentService.getTournamentById(id);
         if(tournament.isPresent()) {
             model.addAttribute("tournament", tournament.get());
         }
@@ -38,9 +38,8 @@ public class TournamentController {
 
     @PostMapping("/torneo/nuevo")
     public String addTournament(Model model, Tournament tournament){
-
-        System.out.println(tournament);        
-        repository.save(tournament);
+    
+        tournamentService.addTournament(tournament);
         model.addAttribute("id", (int)tournament.getId());
         return "tournamentcreated";
     }
