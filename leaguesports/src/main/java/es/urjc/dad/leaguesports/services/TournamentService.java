@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.urjc.dad.leaguesports.model.Tournament;
-import es.urjc.dad.leaguesports.repositories.MatchRepository;
+import es.urjc.dad.leaguesports.repositories.GameRepository;
 import es.urjc.dad.leaguesports.repositories.TournamentRepository;
 
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import org.springframework.data.domain.Pageable;
 public class TournamentService {
     
     @Autowired private TournamentRepository tournamentRepository;
-    @Autowired private MatchRepository matchRepository;
+    @Autowired private GameRepository matchRepository;
 
     @Autowired private TeamService teamService;
 

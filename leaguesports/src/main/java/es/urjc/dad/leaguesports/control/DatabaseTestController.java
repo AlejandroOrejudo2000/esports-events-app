@@ -5,7 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import es.urjc.dad.leaguesports.repositories.MatchRepository;
+import es.urjc.dad.leaguesports.repositories.GameRepository;
 import es.urjc.dad.leaguesports.repositories.PlayerRepository;
 import es.urjc.dad.leaguesports.repositories.TeamRepository;
 import es.urjc.dad.leaguesports.repositories.TournamentRepository;
@@ -20,7 +20,7 @@ public class DatabaseTestController {
     TeamRepository teamRepository;
 
     @Autowired
-    MatchRepository matchRepository;
+    GameRepository matchRepository;
 
     @Autowired
     TournamentRepository tournamentRepository;
