@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 //#endregion
 
@@ -26,6 +27,9 @@ public class Team {
 
     @OneToMany(mappedBy =  "team")
     private List<Player> players;
+
+    @ManyToMany(mappedBy = "participants")
+    private List<Tournament> tournaments;
 
 
     public Team(String teamName, int years) {

@@ -4,18 +4,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 
 @Entity
-public class Match {
+@IdClass(GameId.class)
+public class Game {
     
+    @Id
+    @ManyToOne
+    @MapsId("tournament")
+    private Tournament tournament;
+
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    @MapsId("number")    
+    private long number;
 
-    @ManyToOne
-    private Tournament tournament;
+    
 
     @ManyToOne
     private Team localTeam;
@@ -23,10 +31,11 @@ public class Match {
     @ManyToOne
     private Team visitorTeam;
 
-    protected Match() {
+    protected Game() {
     }
 
-    public Match(Team localteam, Team visitorTeam){
+    public Game(Tournament tournament, Team localteam, Team visitorTeam){
+        this.tournament = tournament;
         this.localTeam = localteam;
         this.visitorTeam = visitorTeam;
     }
@@ -40,7 +49,7 @@ public class Match {
     }
     
     public long getId() {
-        return Id;
+        return number;
     }
 
 }

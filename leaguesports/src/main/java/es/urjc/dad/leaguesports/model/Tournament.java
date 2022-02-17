@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -35,7 +36,10 @@ public class Tournament {
     private Team winner;
 
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Match> matches;
+    private List<Game> games;
+
+    @ManyToMany
+    private List<Team> participants;
 
     protected Tournament() {
     }
@@ -44,21 +48,44 @@ public class Tournament {
         this.name = name;
         this.starting_date = starting_date;
         this.finishing_date = finishing_date;
-        matches = new ArrayList<Match>();
+        games = new ArrayList<Game>();
     }
 
-    public void addMatch(Match match)
-    {
-        matches.add(match);
+    public void addGame(Game game)  {
+        games.add(game);
     }
 
-    public void removeMatch(Match match)
+    public void removeGame(Game game) {
+        games.remove(game);
+    }
+
+    public void addParticipant(Team team){
+        participants.add(team);
+    }
+
+    public void removeParticipant(Team team)
     {
-        matches.remove(match);
+        participants.remove(team);
     }
     
     public long getId() {
         return Id;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
+    }
+
+    public List<Team> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Team> participants) {
+        this.participants = participants;
     }
 
     // TODO: Añadir funcionalidad para convertir strings (input) de fechas a tipo Date.

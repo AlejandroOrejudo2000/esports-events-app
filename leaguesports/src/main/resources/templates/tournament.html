@@ -2,7 +2,30 @@
 
 <h1>{{tournament.name}}</h1>
 
+    <p>Participantes</p>
+    <ul>
+        {{#tournament.participants}}
+            <li><a href="equipo_{{id}}">{{teamName}}</a></li>
+        {{/tournament.participants}}
+    </ul>
+    <br>
+    <form action="torneo_{{tournament.id}}/añadirparticipante" method="post">
+		<label for="nuevoparticipante">Añadir participante</label>
+        <select name="participantId" id="nuevoparticipante">
+            {{#nonparticipants}}
+                <option value="{{id}}">{{teamName}}</option>
+            {{/nonparticipants}}
+        </select>
+		<input type='submit' value='Enviar'/>
+	</form>
+    <br>
 	<p>Partidos</p>
+    <ul>
+        {{#tournament.games}}
+            <li>{-index}: <a href="equipo_{{localteam.id}}">{{localTeam.teamName}}</a> vs <a href="equipo_{{visitorTeam.id}}">{{visitorName.teamName}}{{teamName}}</a></li>
+        {{/tournament.games}}
+    </ul>
+    <br>
     <a href="/torneos">Volver a la lista de torneos</a>
     
     {{>footer}}
