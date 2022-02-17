@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -35,11 +34,8 @@ public class Tournament {
     @ManyToOne
     private Team winner;
 
-    @ManyToMany
-    private List<Team> participants;
-
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Game> matches;
+    private List<Match> matches;
 
     protected Tournament() {
     }
@@ -48,15 +44,15 @@ public class Tournament {
         this.name = name;
         this.starting_date = starting_date;
         this.finishing_date = finishing_date;
-        matches = new ArrayList<Game>();
+        matches = new ArrayList<Match>();
     }
 
-    public void addMatch(Game match)
+    public void addMatch(Match match)
     {
         matches.add(match);
     }
 
-    public void removeMatch(Game match)
+    public void removeMatch(Match match)
     {
         matches.remove(match);
     }
@@ -64,7 +60,6 @@ public class Tournament {
     public long getId() {
         return Id;
     }
-
 
     // TODO: Añadir funcionalidad para convertir strings (input) de fechas a tipo Date.
 

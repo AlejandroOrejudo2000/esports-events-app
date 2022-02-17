@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Game {
+public class Match {
     
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,10 @@ public class Game {
     @ManyToOne
     private Team visitorTeam;
 
-    protected Game() {
+    protected Match() {
     }
 
-    public Game(Team localteam, Team visitorTeam){
+    public Match(Team localteam, Team visitorTeam){
         this.localTeam = localteam;
         this.visitorTeam = visitorTeam;
     }
