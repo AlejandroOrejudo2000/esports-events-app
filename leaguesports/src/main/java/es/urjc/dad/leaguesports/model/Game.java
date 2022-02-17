@@ -23,7 +23,6 @@ public class Game {
     @MapsId("number")    
     private long number;
 
-    
 
     @ManyToOne
     private Team localTeam;

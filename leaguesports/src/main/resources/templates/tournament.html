@@ -5,7 +5,7 @@
     <h2>Participantes</h2>
     <ul>
         {{#tournament.participants}}
-            <li><a href="equipo_{{id}}">{{teamName}}</a></li>
+            <li><a href="equipo_{{id}}">{{teamName}}</a>    <a href="torneo_{{tournament.id}}/borrarequipo_{{id}}"> Eliminar </a></li>
         {{/tournament.participants}}
     </ul>
     <br>
@@ -22,7 +22,7 @@
 	<h2>Partidos</h2>
     <ul>
         {{#tournament.games}}
-            <li>{{-index}}: <a href="equipo_{{localTeam.id}}">{{localTeam.teamName}}</a> vs <a href="equipo_{{visitorTeam.id}}">{{visitorTeam.teamName}}</a></li>
+            <li>{{-index}}: <a href="equipo_{{localTeam.id}}">{{localTeam.teamName}}</a> vs <a href="equipo_{{visitorTeam.id}}">{{visitorTeam.teamName}}</a>    <a href="torneo_{{tournament.id}}/borrarpartido_{{number}}"> Eliminar </a></li>
         {{/tournament.games}}
     </ul>
     <br>

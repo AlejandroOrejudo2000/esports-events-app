@@ -59,5 +59,17 @@ public class TournamentController {
         tournamentService.addGameInTournament(id, localTeamId, visitorTeamId);
         return "redirect:/torneo_{id}";
     }
+
+    @GetMapping("/torneo_{id}/borrarequipo_{teamid}")
+    public String removeParticipant(Model model, @PathVariable long id, @PathVariable long teamid) {
+        tournamentService.removeParticipant(id, teamid);
+        return "redirect:/torneo_{id}";
+    }
+
+    @GetMapping("/torneo_{id}/borrarpartido_{gameid}")
+    public String removeGame(Model model, @PathVariable long id, @PathVariable long gameid) {
+        tournamentService.removeGameInTournament(id, gameid);
+        return "redirect:/torneo_{id}";
+    }
 	
 }

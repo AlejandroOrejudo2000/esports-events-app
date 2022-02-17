@@ -32,8 +32,14 @@ public class TournamentService {
 
     public Optional<Tournament> getTournamentById(long id){
 
-        Optional<Tournament> Tournament = tournamentRepository.findById(id);
-        return Tournament;
+        Optional<Tournament> tournament = tournamentRepository.findById(id);
+        return tournament;
+    }
+
+    public Optional<Game> getGameByNumber(long number){
+
+        Optional<Game> game = gameRepository.findByNumber(number);
+        return game;
     }
 
     public void addTournament(Tournament tournament){
@@ -61,6 +67,22 @@ public class TournamentService {
         }
     }
 
+    public void removeParticipant(long tournamentId, long teamId)
+    {
+        Optional<Tournament> tournament = getTournamentById(tournamentId);
+        Optional<Team> team = teamService.getTeamById(teamId);
+        if(tournament.isPresent() && team.isPresent()) {
+            Tournament t = tournament.get();
+            t.removeParticipant(team.get());
+            List<Game> removedGames = gameRepository.findByTournamentAndVisitorTeamOrLocalTeam(t, team.get(), team.get());
+            for (Game game : removedGames) {
+                t.removeGame(game);
+            }  
+            // Removeall no funciona (?)          
+            tournamentRepository.save(t);
+        }
+    }
+
     public void addGameInTournament(long tournamentId, long localTeamId, long visitorTeamId)
     {
         if(localTeamId == visitorTeamId) return;
@@ -71,6 +93,16 @@ public class TournamentService {
             Tournament t = tournament.get();
             Game game = new Game(t, localTeam.get(), visitorTeam.get());
             t.addGame(game);
+            tournamentRepository.save(t);
+        }
+    }
+
+    public void removeGameInTournament(long tournamentId, long gameNumber){
+        Optional<Tournament> tournament = getTournamentById(tournamentId);
+        Optional<Game> game = getGameByNumber(gameNumber);
+        if(tournament.isPresent() && game.isPresent()){
+            Tournament t = tournament.get();
+            t.removeGame(game.get());
             tournamentRepository.save(t);
         }
     }
