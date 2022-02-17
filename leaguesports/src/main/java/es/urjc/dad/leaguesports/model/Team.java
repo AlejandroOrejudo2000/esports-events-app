@@ -31,6 +31,8 @@ public class Team {
     @ManyToMany(mappedBy = "participants")
     private List<Tournament> tournaments;
 
+    
+
 
     public Team(String teamName, int years) {
         this.teamName = teamName;

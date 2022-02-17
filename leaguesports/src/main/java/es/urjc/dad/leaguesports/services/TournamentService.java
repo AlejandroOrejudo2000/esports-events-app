@@ -63,6 +63,7 @@ public class TournamentService {
 
     public void addGameInTournament(long tournamentId, long localTeamId, long visitorTeamId)
     {
+        if(localTeamId == visitorTeamId) return;
         Optional<Tournament> tournament = getTournamentById(tournamentId);
         Optional<Team> localTeam = teamService.getTeamById(localTeamId);
         Optional<Team> visitorTeam = teamService.getTeamById(visitorTeamId);

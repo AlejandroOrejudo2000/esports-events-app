@@ -53,5 +53,11 @@ public class TournamentController {
         tournamentService.addParticipant(id, participantId);
         return "redirect:/torneo_{id}";
     }
+
+    @PostMapping("/torneo_{id}/añadirpartido")
+    public String addGame(Model model, long localTeamId, long visitorTeamId, @PathVariable long id){
+        tournamentService.addGameInTournament(id, localTeamId, visitorTeamId);
+        return "redirect:/torneo_{id}";
+    }
 	
 }
