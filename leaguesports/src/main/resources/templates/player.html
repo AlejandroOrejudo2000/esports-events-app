@@ -1,3 +1,5 @@
+{{>header}}
+
 <h1>{{player.nickName}}</h1>
 
     <p>Nombre: {{player.firstName}}</p>
@@ -6,3 +8,5 @@
     {{#player.team}}
         <a href="/equipo_{{id}}">Ver equipo</a>
     {{/player.team}}
+
+{{>footer}}
