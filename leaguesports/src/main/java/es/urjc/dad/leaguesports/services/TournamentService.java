@@ -1,7 +1,12 @@
 package es.urjc.dad.leaguesports.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +28,15 @@ public class TournamentService {
     @Autowired private GameRepository gameRepository;
 
     @Autowired private TeamService teamService;
+
+    public Tournament createTournament(String tournamentName, String startDateString, String endDateString) throws ParseException{
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+        Date startDate = formatter.parse(startDateString);
+        Date endDate = formatter.parse(endDateString);
+        Tournament tournament = new Tournament(tournamentName, startDate, endDate);
+        tournamentRepository.save(tournament);
+        return tournament;        
+    }
 
     public Page<Tournament> getAllTournaments(Pageable page){
 
@@ -83,15 +97,17 @@ public class TournamentService {
         }
     }
 
-    public void addGameInTournament(long tournamentId, long localTeamId, long visitorTeamId)
-    {
+    public void addGameInTournament(long tournamentId, long localTeamId, long visitorTeamId, String dateString) throws ParseException{
+
         if(localTeamId == visitorTeamId) return;
         Optional<Tournament> tournament = getTournamentById(tournamentId);
         Optional<Team> localTeam = teamService.getTeamById(localTeamId);
         Optional<Team> visitorTeam = teamService.getTeamById(visitorTeamId);
         if(tournament.isPresent() && localTeam.isPresent() && visitorTeam.isPresent()) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+            Date date = formatter.parse(dateString);
             Tournament t = tournament.get();
-            Game game = new Game(t, localTeam.get(), visitorTeam.get());
+            Game game = new Game(t, localTeam.get(), visitorTeam.get(), date);
             t.addGame(game);
             tournamentRepository.save(t);
         }
@@ -126,6 +142,16 @@ public class TournamentService {
             allTeams.removeAll(t.getParticipants());
         }
         return allTeams;
+    }
+
+    public List<Game> getGamesOrderByDate(long tournamentId) {
+        Optional<Tournament> tournament = getTournamentById(tournamentId);
+        if(tournament.isPresent()){
+            return gameRepository.findByTournamentOrderByGameDateAsc(tournament.get());
+        }
+        else{
+            return new ArrayList<Game>();
+        }        
     }
 
 }

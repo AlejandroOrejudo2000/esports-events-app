@@ -1,5 +1,6 @@
 package es.urjc.dad.leaguesports.control;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,48 +29,71 @@ public class TournamentController {
         return "tournaments";
     }
 
-    @GetMapping("/torneo_{id}")
+    @GetMapping("/torneo/{id}")
     public String showTournamentDetails(Model model, @PathVariable long id) {
 
         Optional<Tournament> tournament = tournamentService.getTournamentById(id);
         List<Team> nonparticipants = tournamentService.getTournamentNonParticipants(id);
         if(tournament.isPresent()) {
-            model.addAttribute("tournament", tournament.get());
+            Tournament t = tournament.get();
+            model.addAttribute("tournament", t);
             model.addAttribute("nonparticipants", nonparticipants);
+            model.addAttribute("games", tournamentService.getGamesOrderByDate(id));
         }
         return "tournament";
     }
 
     @PostMapping("/torneo/nuevo")
-    public String addTournament(Model model, Tournament tournament){
-    
-        tournamentService.addTournament(tournament);
-        model.addAttribute("id", (int)tournament.getId());
-        return "tournamentcreated";
+    public String addTournament(Model model, String tournamentName, String startDate, String endDate){   
+
+        try{
+            Tournament t = tournamentService.createTournament(tournamentName, startDate, endDate);
+            model.addAttribute("id", (int)t.getId());
+            return "tournamentcreated";
+        }
+        catch(ParseException e){
+            return "redirect:/torneos";
+        }          
     }
 
-    @PostMapping("/torneo_{id}/añadirparticipante")
-    public String addParticipant(Model model, long participantId, @PathVariable long id){
+    @PostMapping("/torneo/{id}/añadirparticipante")
+    public String addParticipant(long participantId, @PathVariable long id){
         tournamentService.addParticipant(id, participantId);
-        return "redirect:/torneo_{id}";
+        return "redirect:/torneo/{id}";
     }
 
-    @PostMapping("/torneo_{id}/añadirpartido")
-    public String addGame(Model model, long localTeamId, long visitorTeamId, @PathVariable long id){
-        tournamentService.addGameInTournament(id, localTeamId, visitorTeamId);
-        return "redirect:/torneo_{id}";
+    @PostMapping("/torneo/{id}/añadirpartido")
+    public String addGame(long localTeamId, long visitorTeamId, String gameDate, @PathVariable long id){
+
+        System.out.println("__________________________" + gameDate + "________________________________");
+        try{
+            tournamentService.addGameInTournament(id, localTeamId, visitorTeamId, gameDate);
+            return "redirect:/torneo/{id}";
+        }
+        catch(ParseException e){
+            System.out.println(e.getMessage());
+            return "redirect:/torneos";
+        } 
+        
     }
 
-    @GetMapping("/torneo_{id}/borrarequipo_{teamid}")
-    public String removeParticipant(Model model, @PathVariable long id, @PathVariable long teamid) {
+    @GetMapping("/torneo/{id}/borrarequipo/{teamid}")
+    public String removeParticipant(@PathVariable long id, @PathVariable long teamid) {
         tournamentService.removeParticipant(id, teamid);
-        return "redirect:/torneo_{id}";
+        return "redirect:/torneo/{id}";
     }
 
-    @GetMapping("/torneo_{id}/borrarpartido_{gameid}")
-    public String removeGame(Model model, @PathVariable long id, @PathVariable long gameid) {
+    @GetMapping("/torneo/{id}/borrarpartido/{gameid}")
+    public String removeGame(@PathVariable long id, @PathVariable long gameid) {
         tournamentService.removeGameInTournament(id, gameid);
-        return "redirect:/torneo_{id}";
+        return "redirect:/torneo/{id}";
+    }
+
+    @GetMapping("torneo/{id}/borrar")
+    public String removeTournament(@PathVariable long id){
+        tournamentService.removeTournament(id);
+        return "redirect:/torneos";
+
     }
 	
 }

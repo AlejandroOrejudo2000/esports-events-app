@@ -25,7 +25,7 @@ public class TeamController{
         return "teams";
     }
 
-    @GetMapping("/equipo_{id}")
+    @GetMapping("/equipo/{id}")
     public String showTeamDetails(Model model, @PathVariable long id){
         Optional<Team> team = teamService.getTeamById(id);
         if(team.isPresent()) {

@@ -26,7 +26,7 @@ public class PlayerController {
         return "players";
     }
 
-    @GetMapping("/jugador_{id}")
+    @GetMapping("/jugador/{id}")
     public String showPlayerDetails(Model model, @PathVariable long id) {
 
         Optional<Player> player = playerService.getPlayerById(id);

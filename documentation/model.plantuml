@@ -1,0 +1,20 @@
+@startuml DATABASE
+
+entity "Team" as tm
+entity "Player" as pl
+entity "Tournament" as tr
+entity "Game" as gm
+entity "User" as us
+entity "Product" as pr
+
+entity "Participant" as pt
+
+tm }o-- pl
+tr }o-- pt
+tm }o--pt
+tr }o-- gm
+gm ||-- tm
+gm ||-- tm
+us }o-- pr
+
+@enduml
