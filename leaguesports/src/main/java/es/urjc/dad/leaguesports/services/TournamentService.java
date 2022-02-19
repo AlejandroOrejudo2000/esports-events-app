@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
+import java.util.SortedSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,13 @@ public class TournamentService {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
         Date startDate = formatter.parse(startDateString);
         Date endDate = formatter.parse(endDateString);
+
+        if(startDate.compareTo(endDate) >= 0){
+            Date aux = endDate;
+            endDate = startDate;
+            startDate = aux;
+        }
+
         Tournament tournament = new Tournament(tournamentName, startDate, endDate);
         tournamentRepository.save(tournament);
         return tournament;        

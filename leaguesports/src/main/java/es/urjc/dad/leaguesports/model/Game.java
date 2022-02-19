@@ -81,6 +81,22 @@ public class Game {
     public void setGameResults(GameResults gameResults) {
         this.gameResults = gameResults;
     }
+
+    public Team getLocalTeam() {
+        return localTeam;
+    }
+
+    public void setLocalTeam(Team localTeam) {
+        this.localTeam = localTeam;
+    }
+
+    public Team getVisitorTeam() {
+        return visitorTeam;
+    }
+
+    public void setVisitorTeam(Team visitorTeam) {
+        this.visitorTeam = visitorTeam;
+    }
     
 
 }

@@ -3,21 +3,19 @@ package es.urjc.dad.leaguesports.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.GenerationType;
 
 @Entity
-public class Tournament {
+public class Tournament{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +33,7 @@ public class Tournament {
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Game> games;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Team> participants;
 
     protected Tournament() {

@@ -2,9 +2,10 @@ package es.urjc.dad.leaguesports.model;
 
 //#region External dependences
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 import java.util.ArrayList;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Team {
     @OneToMany(mappedBy =  "team")
     private List<Player> players;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "participants")
+    @ManyToMany(mappedBy = "participants")
     private List<Tournament> tournaments;   
 
 
@@ -91,6 +92,12 @@ public class Team {
         for (Player player : players) {
             player.setTeam(null);
         }
+        for(Tournament tournament : tournaments){
+            tournament.removeParticipant(this);  
+            for (Game game : tournament.getGames()) {
+                if(game.getVisitorTeam() == this || game.getLocalTeam() == this)
+                    tournament.removeGame(game);
+            }          
+        }
     }
-
 }

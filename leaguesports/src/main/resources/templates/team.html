@@ -6,7 +6,7 @@
     <p>Jugadores</p>
     <ul>
         {{#team.players}}
-            <li><a href="jugador/{{id}}">{{nickName}}</a></li>
+            <li><a href="/jugador/{{id}}">{{nickName}}</a></li>
         {{/team.players}}
     </ul>
     <br>
@@ -16,7 +16,7 @@
 
     <a href="/equipo/{{team.id}}/borrar">Eliminar equipo</a>
     <br>
-    
+
     <a href="/equipos">Volver a la lista de equipos</a>
 
     {{>footer}}
