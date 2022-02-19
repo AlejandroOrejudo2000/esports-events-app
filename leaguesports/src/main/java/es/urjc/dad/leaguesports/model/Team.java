@@ -3,6 +3,8 @@ package es.urjc.dad.leaguesports.model;
 //#region External dependences
 import java.util.List;
 import java.util.ArrayList;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 //#endregion
+import javax.persistence.PreRemove;
 
 @Entity
 public class Team {
@@ -28,10 +31,8 @@ public class Team {
     @OneToMany(mappedBy =  "team")
     private List<Player> players;
 
-    @ManyToMany(mappedBy = "participants")
-    private List<Tournament> tournaments;
-
-    
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "participants")
+    private List<Tournament> tournaments;   
 
 
     public Team(String teamName, int years) {
@@ -84,4 +85,12 @@ public class Team {
     public String toString() {
         return "Team [" + teamName + "]";
     }
+
+    @PreRemove
+    public void OnDeleteSetNull(){
+        for (Player player : players) {
+            player.setTeam(null);
+        }
+    }
+
 }

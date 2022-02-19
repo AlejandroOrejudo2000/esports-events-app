@@ -46,4 +46,9 @@ public class TeamService {
             teamRepository.delete(t);
         }    
     }
+
+    public void updateTeam(long id, Team updatedTeam) {
+        updatedTeam.setId(id);
+        teamRepository.save(updatedTeam);
+    }
 }

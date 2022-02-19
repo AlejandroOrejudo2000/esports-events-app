@@ -3,10 +3,31 @@
 <h1>{{player.nickName}}</h1>
 
     <p>Nombre: {{player.firstName}}</p>
-    <p>Apellido: {{player.lastName}}</p>
-    <a href="/jugadores">Volver a la lista de jugadores</a>
+    <p>Apellido: {{player.lastName}}</p>   
+
+    <b>Equipo: </b>
     {{#player.team}}
         <a href="/equipo/{{id}}">Ver equipo</a>
+        <a href="/jugador/{{player.id}}/eliminarequipo">Eliminar equipo</a>
     {{/player.team}}
+    {{^player.team}}
+        <form action="/jugador/{{player.id}}/equipo" method="post">
+            <select name="teamId" id="playerTeam">
+                {{#teams}}
+                    <option value="{{id}}">{{teamName}}</option>
+                {{/teams}}
+            </select>
+		<input type='submit' value='Enviar'/>
+        </form>
+    {{/player.team}}
+    <br>
+
+    <a href="/jugador/{{player.id}}/editar">Editar jugador</a>
+    <br>
+
+    <a href="/jugador/{{player.id}}/borrar">Eliminar jugador</a>
+    <br>
+
+    <a href="/jugadores">Volver a la lista de jugadores</a>
 
 {{>footer}}

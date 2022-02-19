@@ -41,4 +41,26 @@ public class TeamController{
         model.addAttribute("id", (int)team.getId());
         return "teamcreated";
     }
+
+    @GetMapping("/equipo/{id}/borrar")
+    public String deleteTeam(@PathVariable long id){
+        teamService.removeTeam(id);
+        return "redirect:/equipos";
+    }
+
+    @GetMapping("/equipo/{id}/editar")
+    public String editPlayer(Model model, @PathVariable long id){
+        Optional<Team> team = teamService.getTeamById(id);
+        if(team.isPresent()) {
+            model.addAttribute("team", team.get());
+        }
+        return "updateteam";
+    }
+
+    @PostMapping("/equipo/{id}/actualizar")
+    public String updateTeam(@PathVariable long id, Team team){
+
+        teamService.updateTeam(id, team);
+        return "redirect:/equipo/{id}";
+    }
 }

@@ -1,0 +1,22 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+</head>
+    <form action="/jugador/{{player.id}}/actualizar" method="post">
+        <p>Nombre de usuario: </p>
+        <input type='text' name='nickName' value="{{player.nickName}}"/>
+        <p>Nombre:</p>
+        <input type='text' name='firstName' value="{{player.firstName}}"/>
+        <p>Apellidos:</p>
+        <input type='text' name='lastName' value="{{player.lastName}}">
+        <p>Edad:</p>
+        <input type='number' name='age' value="{{player.age}}">
+        <p>Género:</p>
+        <input type='text' name='genre' value="{{player.genre}}">
+        <p>Nacionalidad:</p>
+        <input type='text' name='nationality' value="{{player.nationality}}">
+
+        <input type='submit' value='Enviar'/>
+    </form>
+</body>
+</html>

@@ -32,13 +32,10 @@ public class Tournament {
     @Temporal(TemporalType.DATE)
     private Date finishing_date;
 
-    @ManyToOne
-    private Team winner;
-
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Game> games;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Team> participants;
 
     protected Tournament() {
@@ -87,7 +84,4 @@ public class Tournament {
     public void setParticipants(List<Team> participants) {
         this.participants = participants;
     }
-
-    // TODO: Añadir funcionalidad para convertir strings (input) de fechas a tipo Date.
-
 }

@@ -65,7 +65,6 @@ public class TournamentController {
     @PostMapping("/torneo/{id}/añadirpartido")
     public String addGame(long localTeamId, long visitorTeamId, String gameDate, @PathVariable long id){
 
-        System.out.println("__________________________" + gameDate + "________________________________");
         try{
             tournamentService.addGameInTournament(id, localTeamId, visitorTeamId, gameDate);
             return "redirect:/torneo/{id}";

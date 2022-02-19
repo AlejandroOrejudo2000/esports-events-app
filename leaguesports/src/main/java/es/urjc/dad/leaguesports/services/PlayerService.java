@@ -62,6 +62,13 @@ public class PlayerService {
             p.setTeam(null);
             playerRepository.save(p);
         }              
+    }
+
+    public void updatePlayer(long id, Player updatedPlayer) {
+
+        updatedPlayer.setId(id);
+        playerRepository.save(updatedPlayer);
+
     }   
 
 }

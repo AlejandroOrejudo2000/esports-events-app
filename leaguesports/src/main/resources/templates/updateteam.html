@@ -1,0 +1,15 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<form action="/equipo/{{team.id}}/actualizar" method="post">
+		<p>Nombre: </p>
+		<input type='text' name='teamName' value="{{team.teamName}}"/>
+		<p>Años:</p>
+		<input type='number' name='years' value="{{team.years}}"/>
+		
+		<input type='submit' value='Enviar'/>
+	</form>
+</body>
+</html>
