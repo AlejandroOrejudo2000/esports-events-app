@@ -1,9 +1,9 @@
 {{>header}}
 
-<h1>{{team.teamName}}</h1>
+<h1>{{team.teamName}}</h1><br>
 
-    <p>Años: {{team.years}}</p>
-    <p>Jugadores</p>
+    <p>Años: {{team.years}}</p><br>
+    <h2>Jugadores</h2><br>
     <ul>
         {{#team.players}}
             <li><a href="/jugador/{{id}}">{{nickName}}</a></li>
@@ -13,8 +13,10 @@
 
     <a href="/equipo/{{team.id}}/editar">Editar equipo</a>
     <br>
+    <br>
 
     <a href="/equipo/{{team.id}}/borrar">Eliminar equipo</a>
+    <br>
     <br>
 
     <a href="/equipos">Volver a la lista de equipos</a>

@@ -1,9 +1,9 @@
 {{>header}}
 
-<h1>{{player.nickName}}</h1>
+<h1>{{player.nickName}}</h1><br>
 
-    <p>Nombre: {{player.firstName}}</p>
-    <p>Apellido: {{player.lastName}}</p>   
+    <p>Nombre: {{player.firstName}}</p><br>
+    <p>Apellido: {{player.lastName}}</p><br>   
 
     <b>Equipo: </b>
     {{#player.team}}
@@ -21,11 +21,14 @@
         </form>
     {{/player.team}}
     <br>
+    <br>
 
     <a href="/jugador/{{player.id}}/editar">Editar jugador</a>
     <br>
+    <br>
 
     <a href="/jugador/{{player.id}}/borrar">Eliminar jugador</a>
+    <br>
     <br>
 
     <a href="/jugadores">Volver a la lista de jugadores</a>
