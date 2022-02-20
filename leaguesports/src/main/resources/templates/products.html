@@ -1,0 +1,12 @@
+{{>header}}
+
+<h1>Productos</h1>
+
+    {{#productList}}
+	<a href="producto/{{id}}">{{productName}} {{price}}</a><br>
+	{{/productList}}
+
+    <br>
+	<a href="createproduct.html">Crear producto</a><br>
+
+{{>footer}}

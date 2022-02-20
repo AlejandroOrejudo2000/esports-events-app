@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 
 import es.urjc.dad.leaguesports.model.Player;
 import es.urjc.dad.leaguesports.model.Team;
+import es.urjc.dad.leaguesports.model.Product;
 
 @Service
 public class DataBaseInitializer {
     
     @Autowired private PlayerService playerService;
     @Autowired private TeamService teamService;
+    @Autowired private ProductService productService;
 
     private final int NUM_PLAYERS = 100;
     private final int NUM_TEAMS = 20;
+    private final int NUM_PRODUCTS = 10;
 
     @PostConstruct
     private void initDatabase()
@@ -31,6 +34,9 @@ public class DataBaseInitializer {
             playerService.setPlayerTeam(i, new Random().nextInt(NUM_TEAMS + 10));
         }       
 
+        for(int i = 0; i < NUM_PRODUCTS; i++) {
+        	productService.addProduct(new Product("Producto prueba " + i, i * 10));
+        }     
 
     }
 }
