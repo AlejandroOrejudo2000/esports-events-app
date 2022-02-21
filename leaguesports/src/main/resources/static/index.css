@@ -30,6 +30,7 @@ body{
 .header a{
     color: white;
     text-decoration: none;
+    font-size: 23px;
 }
 .logo-nav-container{
     display: flex;
@@ -73,6 +74,10 @@ body{
     color: #FFF7E6;
 }
 
+a{
+	font-size: 18px;
+}
+
 footer{
     position: relative;
     background-color: #000;
@@ -92,11 +97,12 @@ footer{
 }
 
 p{
-	font-size: 18px;
+	line-height:40px;
+	font-size: 17px;
 }
 
-h1{
-	font-size: 25px;
+h1{	
+	font-size: 26px;
 }
 
 img{
