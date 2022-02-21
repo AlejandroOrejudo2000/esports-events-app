@@ -3,6 +3,7 @@ package es.urjc.dad.leaguesports.control;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,13 @@ public class PlayerController {
     @GetMapping("/jugadores")
     public String showPlayers(Model model, Pageable page) {   
 
-        model.addAttribute("playerlist", playerService.getAllPlayers(page));
+        Page<Player> playerPage = playerService.getAllPlayers(page);
+
+        model.addAttribute("playerlist", playerPage);
+        model.addAttribute("hasprevious", playerPage.hasPrevious());
+        model.addAttribute("hasnext", playerPage.hasNext());
+        model.addAttribute("previous", playerPage.getNumber() - 1);
+        model.addAttribute("next", playerPage.getNumber() + 1);
         return "players";
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,14 @@ public class TournamentController {
     @GetMapping("/torneos")
     public String showTournaments(Model model, Pageable page) {   
 
-        model.addAttribute("tournamentList", tournamentService.getAllTournaments(page));
+        Page<Tournament> tournamentpage = tournamentService.getAllTournaments(page);
+
+        model.addAttribute("tournamentList", tournamentpage);
+        model.addAttribute("hasprevious", tournamentpage.hasPrevious());
+        model.addAttribute("hasnext", tournamentpage.hasNext());
+        model.addAttribute("previous", tournamentpage.getNumber() - 1);
+        model.addAttribute("next", tournamentpage.getNumber() + 1);
+
         return "tournaments";
     }
 

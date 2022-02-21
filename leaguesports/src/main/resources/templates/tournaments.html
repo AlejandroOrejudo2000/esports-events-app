@@ -5,8 +5,17 @@
     {{#tournamentList}}
 	<a href="torneo/{{id}}">{{name}} </a><br>
 	{{/tournamentList}}
-
+	<br>
+	{{#hasprevious}}
+		<a href="/torneos?page={{previous}}">Anterior</a>		
+	{{/hasprevious}}
+	<br>
+	{{#hasnext}}
+		<a href="/torneos?page={{next}}">Siguiente</a>
+	{{/hasnext}}
     <br>
 	<a href="createtournament.html">Crear torneo</a>
+	<br>
+	<br>
 	
 {{>footer}}

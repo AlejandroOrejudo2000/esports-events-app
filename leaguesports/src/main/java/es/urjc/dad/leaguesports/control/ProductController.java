@@ -3,6 +3,7 @@ package es.urjc.dad.leaguesports.control;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,14 @@ public class ProductController {
 
     @GetMapping("/productos")
     public String showPlayers(Model model, Pageable page) {   
+        Page<Product> productpage = productService.getAllProducts(page);
 
-        model.addAttribute("productList", productService.getAllProducts(page));
+        model.addAttribute("productList", productpage);
+        model.addAttribute("hasprevious", productpage.hasPrevious());
+        model.addAttribute("hasnext", productpage.hasNext());
+        model.addAttribute("previous", productpage.getNumber() - 1);
+        model.addAttribute("next", productpage.getNumber() + 1);
+
         return "products";
     }
 

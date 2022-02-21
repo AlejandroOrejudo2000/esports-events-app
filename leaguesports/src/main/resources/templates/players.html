@@ -5,7 +5,15 @@
     {{#playerlist}}
 	<a href="jugador/{{id}}">{{nickName}} {{firstName}} {{lastName}}</a><br>
 	{{/playerlist}}
-
+	<br>
+	<br>
+	{{#hasprevious}}
+		<a href="/jugadores?page={{previous}}">Anterior</a>		
+	{{/hasprevious}}
+	<br>
+	{{#hasnext}}
+		<a href="/jugadores?page={{next}}">Siguiente</a>
+	{{/hasnext}}
     <br>
 	<a href="createplayer.html">Crear jugador</a><br>
 

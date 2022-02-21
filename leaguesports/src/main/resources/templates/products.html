@@ -5,8 +5,17 @@
     {{#productList}}
 	<a href="producto/{{id}}">{{productName}} {{price}}</a><br>
 	{{/productList}}
-
+	<br>
+	{{#hasprevious}}
+		<a href="/productos?page={{previous}}">Anterior</a>		
+	{{/hasprevious}}
+	<br>
+	{{#hasnext}}
+		<a href="/productos?page={{next}}">Siguiente</a>
+	{{/hasnext}}
     <br>
 	<a href="createproduct.html">Crear producto</a><br>
+	<br>
+	<br>
 
 {{>footer}}

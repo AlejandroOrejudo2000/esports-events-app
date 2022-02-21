@@ -5,8 +5,16 @@
     {{#teamlist}}
 	<a href="equipo/{{id}}">{{teamName}}</a><br>
 	{{/teamlist}}
-
+	<br>
+	{{#hasprevious}}
+		<a href="/equipos?page={{previous}}">Anterior</a>		
+	{{/hasprevious}}
+	<br>
+	{{#hasnext}}
+		<a href="/equipos?page={{next}}">Siguiente</a>
+	{{/hasnext}}
     <br>
-	<a href="createteam.html">Crear equipo</a>
-
+	<a href="/createteam.html">Crear equipo</a>
+	<br>
+	<br>
 {{>footer}}

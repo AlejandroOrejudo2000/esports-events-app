@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
@@ -21,7 +22,14 @@ public class TeamController{
     @GetMapping("/equipos")
     public String showTeams(Model model, Pageable page) {
 
-        model.addAttribute("teamlist", teamService.getAllTeams(page));
+        Page<Team> teampage = teamService.getAllTeams(page);
+
+        model.addAttribute("teamlist", teampage);
+        model.addAttribute("hasprevious", teampage.hasPrevious());
+        model.addAttribute("hasnext", teampage.hasNext());
+        model.addAttribute("previous", teampage.getNumber() - 1);
+        model.addAttribute("next", teampage.getNumber() + 1);
+
         return "teams";
     }
 
