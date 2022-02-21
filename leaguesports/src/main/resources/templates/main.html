@@ -1,28 +1,38 @@
 {{>header}}
 
-     <h1>Torneos</h1>
+<div class="grid-container">
+  <div class="grid-item"> 
+  <h1>Torneos</h1>
      <p>Sección para crear y visualizar torneos.</p><br>
      <a href="/torneos">
-  		<img th:src="/images/tournaments.png" alt="Torneos">
+  		<img src="/images/tournaments.png" alt="Torneos">
 	 </a><br>
 	 <br>
-     <h1>Equipos</h1>
-     <p>Sección para añadir, modificar o borrar equipos de la lista de equipos existente.</p><br>
+  </div>
+  <div class="grid-item">
+  <h1>Equipos</h1>
+     <p>Sección para añadir, modificar o borrar equipos.</p><br>
      <a href="/equipos">
-  		<img th:src="/images/teams.png" alt="Equipos">
+  		<img src="/images/teams.png" alt="Equipos">
 	 </a><br>
 	 <br>
-     <h1>Jugadores</h1>
-     <p>Sección para añadir,modificar o borrar jugadores de la lista de jugadores existentes.</p><br>
+  </div>
+  <div class="grid-item">
+  <h1>Jugadores</h1>
+     <p>Sección para añadir, modificar o borrar jugadores.</p><br>
      <a href="/jugadores">
-  		<img th:src="/images/players.png" alt="Jugadores">
+  		<img src="/images/players.png" alt="Jugadores">
 	 </a><br>
 	 <br>
-     <h1>Productos</h1>
-     <p>Sección para compra de productos y entradas.</p><br>
+  </div>  
+  <div class="grid-item">
+  <h1>Productos</h1>
+  <p>Sección para compra de productos y entradas.</p><br>
      <a href="/productos">
-  		<img th:src="/images/products.png" alt="Productos">
+  		<img src="/images/products.png" alt="Productos">
 	 </a><br>
 	 <br>
+  </div>
+</div>
 
 {{>footer}}
