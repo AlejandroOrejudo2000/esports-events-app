@@ -19,11 +19,15 @@ public class User {
     @Column
     private String userName;
     
+    @Column
+    private String password;
+    
     @OneToMany(mappedBy =  "user")
     private List<Product> products;
 
-    public User(String userName) {        
+    public User(String userName, String password) {        
         this.userName = userName;
+        this.password = password;
     }
 
     protected User() {
@@ -45,6 +49,14 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     //#endregion
