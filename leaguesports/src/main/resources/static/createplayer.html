@@ -1,23 +1,27 @@
 <html>
 <head>
 	<meta charset="UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="/forms.css">
 </head>
 <body>
-	<form action="jugador/nuevo" method="post">
-		<p>Nombre de usuario: </p>
-		<input type='text' name='nickName'/>
-		<p>Nombre:</p>
-		<input type='text' name='firstName'/>
-		<p>Apellidos:</p>
-		<input type='text' name='lastName'>
-		<p>Edad:</p>
-		<input type='number' name='age'>
-		<p>Género:</p>
-		<input type='text' name='genre'>
-		<p>Nacionalidad:</p>
-		<input type='text' name='nationality'>
-
-		<br><br><input type='submit' value='Enviar'/>
-	</form>
+	<div class="form">
+		<form action="jugador/nuevo" method="post">
+			<p>Nombre de usuario: </p>
+			<input type='text' name='nickName'/>
+			<p>Nombre:</p>
+			<input type='text' name='firstName'/>
+			<p>Apellidos:</p>
+			<input type='text' name='lastName'>
+			<p>Edad:</p>
+			<input type='number' name='age'>
+			<p>Género:</p>
+			<input type='text' name='genre'>
+			<p>Nacionalidad:</p>
+			<input type='text' name='nationality'>
+	
+			<br><br><input type='submit' value='Enviar'/>
+		</form>
+	</div>
+	
 </body>
 </html>

@@ -1,0 +1,34 @@
+/***************************** general ******************************/
+
+*
+{
+    font-family: verdana;
+    font-size: 1.2rem;
+    line-height: 1.3em;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #080808;
+    color: white;
+}
+
+.container{
+    width: 85%;
+    margin: 0 auto;
+}
+
+.form{
+    padding: 2em;
+}
+
+.form input{
+    margin-bottom: 2em;
+}
+
+.control{
+    background-color: #444;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}

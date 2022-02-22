@@ -5,8 +5,11 @@
 <div id="playerinfo">
     <p>Nombre: {{player.firstName}}</p>
     <p>Apellido: {{player.lastName}}</p>
+    <p>Edad: {{player.age}}</p>
+    <p>Género: {{player.genre}}</p>
+    <p>Nacionalidad: {{player.nationality}}</p>
 </div>
-    
+
 <div id="playerteam">
 {{#player.team}}
     <a href="/equipo/{{id}}">{{teamName}}</a>
