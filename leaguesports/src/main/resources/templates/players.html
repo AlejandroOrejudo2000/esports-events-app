@@ -1,20 +1,37 @@
 {{>header}}
 
-<h1>Jugadores</h1><br>
-
-    {{#playerlist}}
-	<a href="jugador/{{id}}">{{nickName}} {{firstName}} {{lastName}}</a><br>
+<h1 id="players">JUGADORES</h1>
+<ul id="playerlist">
+	{{#playerlist}}
+	<li>
+		<div class ="nickname">
+			<a href="jugador/{{id}}">{{nickName}} </a>
+		</div>
+		<div class="playerdetails">
+			<p>{{firstName}}</p>
+			<p>{{lastName}}</p>
+		</div>		
+	</li>		
 	{{/playerlist}}
-	<br>
-	<br>
+</ul>
+<nav>
+	<div class="pages">
 	{{#hasprevious}}
-		<a href="/jugadores?page={{previous}}">Anterior</a>		
+		<a href="/jugadores?page={{previous}}">< ANTERIOR</a>
 	{{/hasprevious}}
-	<br>
+	{{^hasprevious}}
+		<b></b>
+	{{/hasprevious}}
 	{{#hasnext}}
-		<a href="/jugadores?page={{next}}">Siguiente</a>
+		<a href="/jugadores?page={{next}}">SIGUIENTE ></a>
 	{{/hasnext}}
-    <br>
-	<a href="createplayer.html">Crear jugador</a><br>
+	{{^hasnext}}
+		<b></b>
+	{{/hasnext}}
+	</div>
+	<div class="control">
+		<a href="createplayer.html">CREAR JUGADOR</a><br>
+	</div>
+</nav>
 
 {{>footer}}

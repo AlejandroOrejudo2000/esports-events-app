@@ -1,21 +1,36 @@
 {{>header}}
 
-<h1>Productos</h1><br>
-
-    {{#productList}}
-	<a href="producto/{{id}}">{{productName}} {{price}}</a><br><br>
+<h1 id="products">PRODUCTOS</h1>
+<ul id="productlist">
+	{{#productList}}
+	<li>
+		<div class ="productname">
+			<a href="producto/{{id}}">{{productName}}</a>
+		</div>	
+		<div class="productdetails">
+			<p> {{price}}$</p>
+		</div>	
+	</li>
 	{{/productList}}
-	<br>
+</ul>
+<nav>
+	<div class="pages">
 	{{#hasprevious}}
-		<a href="/productos?page={{previous}}">Anterior</a>		
+		<a href="/productos?page={{previous}}">< ANTERIOR</a>
 	{{/hasprevious}}
-	<br>
+	{{^hasprevious}}
+		<b></b>
+	{{/hasprevious}}
 	{{#hasnext}}
-		<a href="/productos?page={{next}}">Siguiente</a>
+		<a href="/productos?page={{next}}">SIGUIENTE ></a>
 	{{/hasnext}}
-    <br>
-	<a href="createproduct.html">Crear producto</a><br>
-	<br>
-	<br>
+	{{^hasnext}}
+		<b></b>
+	{{/hasnext}}
+	</div>
+	<div class="control">
+		<a href="createproduct.html">CREAR PRODUCTO</a><br>
+	</div>
+</nav>    
 
 {{>footer}}

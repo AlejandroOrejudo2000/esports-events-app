@@ -1,21 +1,33 @@
 {{>header}}
 
-<h1>Torneos</h1><br>
-
-    {{#tournamentList}}
-	<a href="torneo/{{id}}">{{name}} </a><br>
+<h1 id="tournaments">TORNEOS</h1><br>
+<ul id="tournamentlist">
+	{{#tournamentList}}
+	<li>
+		<div class ="tournamentname">
+			<a href="torneo/{{id}}">{{name}} </a>
+		</div>
+	</li>	
 	{{/tournamentList}}
-	<br>
+</ul>
+<nav>
+	<div class="pages">
 	{{#hasprevious}}
-		<a href="/torneos?page={{previous}}">Anterior</a>		
+		<a href="/torneos?page={{previous}}">< ANTERIOR</a>	
 	{{/hasprevious}}
-	<br>
+	{{^hasprevious}}
+		<b></b>
+	{{/hasprevious}}
 	{{#hasnext}}
-		<a href="/torneos?page={{next}}">Siguiente</a>
+		<a href="/torneos?page={{next}}">SIGUIENTE ></a>
 	{{/hasnext}}
-    <br>
-	<a href="createtournament.html">Crear torneo</a>
-	<br>
-	<br>
-	
+	{{^hasnext}}
+		<b></b>
+	{{/hasnext}}
+	</div>
+	<div class="control">
+		<a href="createtournament.html">Crear torneo</a>
+	</div>
+</nav>	
+
 {{>footer}}

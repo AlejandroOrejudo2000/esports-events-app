@@ -1,20 +1,32 @@
 {{>header}}
 
-<h1>Equipos</h1><br>
-
+<h1 id="teams">EQUIPOS</h1>
+<ul id="teamlist">
     {{#teamlist}}
-	<a href="equipo/{{id}}">{{teamName}}</a><br>
+	<li>
+		<div class ="teamname">
+			<a href="equipo/{{id}}">{{teamName}}</a><br>
+		</div>		
+	</li>	
 	{{/teamlist}}
-	<br>
+</ul>	
+<nav>
+	<div class="pages">
 	{{#hasprevious}}
 		<a href="/equipos?page={{previous}}">Anterior</a>		
 	{{/hasprevious}}
-	<br>
+	{{^hasprevious}}
+		<b></b>
+	{{/hasprevious}}
 	{{#hasnext}}
 		<a href="/equipos?page={{next}}">Siguiente</a>
 	{{/hasnext}}
-    <br>
-	<a href="/createteam.html">Crear equipo</a>
-	<br>
-	<br>
+	{{^hasnext}}
+		<b></b>
+	{{/hasnext}}
+	</div>
+	<div class="control">
+		<a href="/createteam.html">Crear equipo</a>
+	</div>
+</nav>
 {{>footer}}
