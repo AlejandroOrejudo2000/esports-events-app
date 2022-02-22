@@ -1,36 +1,35 @@
 {{>header}}
 
-<h1>{{player.nickName}}</h1><br>
+<h1 id="players">{{player.nickName}}</h1>
 
-    <p>Nombre: {{player.firstName}}</p><br>
-    <p>Apellido: {{player.lastName}}</p><br>   
-
-    <b>Equipo: </b>
-    {{#player.team}}
-        <a href="/equipo/{{id}}">Ver equipo</a>
-        <a href="/jugador/{{player.id}}/eliminarequipo">Eliminar equipo</a>
+<div id="playerinfo">
+    <p>Nombre: {{player.firstName}}</p>
+    <p>Apellido: {{player.lastName}}</p>
+</div>
+    
+<div id="playerteam">
+{{#player.team}}
+    <a href="/equipo/{{id}}">{{teamName}}</a>
+    <a href="/jugador/{{player.id}}/eliminarequipo"> - Eliminar equipo</a>
+{{/player.team}}
+{{^player.team}}
+    <form action="/jugador/{{player.id}}/equipo" method="post">
+        <select name="teamId" id="playerTeam">
+            {{#teams}}
+                <option value="{{id}}">{{teamName}}</option>
+            {{/teams}}
+        </select>
+    <input type='submit' value='Seleccionar equipo'/>
+    </form>
     {{/player.team}}
-    {{^player.team}}
-        <form action="/jugador/{{player.id}}/equipo" method="post">
-            <select name="teamId" id="playerTeam">
-                {{#teams}}
-                    <option value="{{id}}">{{teamName}}</option>
-                {{/teams}}
-            </select>
-		<input type='submit' value='Enviar'/>
-        </form>
-    {{/player.team}}
-    <br>
-    <br>
-
-    <a href="/jugador/{{player.id}}/editar">Editar jugador</a>
-    <br>
-    <br>
-
-    <a href="/jugador/{{player.id}}/borrar">Eliminar jugador</a>
-    <br>
-    <br>
-
-    <a href="/jugadores">Volver a la lista de jugadores</a>
+</div>     
+    
+<nav>
+	<div class="control">
+        <a href="/jugador/{{player.id}}/editar">Editar jugador</a>
+        <a href="/jugadores">Volver a la lista de jugadores</a>
+        <a href="/jugador/{{player.id}}/borrar">Eliminar jugador</a>       
+	</div>
+</nav>
 
 {{>footer}}

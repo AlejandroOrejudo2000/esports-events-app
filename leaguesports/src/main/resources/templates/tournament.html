@@ -1,16 +1,21 @@
 {{>header}}
 
-<h1>{{tournament.name}}</h1>
-    <br>
-    <h4>Fecha inicio: {{tournament.starting_date}}</h4>
-    <h4>Fecha fin: {{tournament.finishing_date}}</h4>
+<h1 id="tournaments">{{tournament.name}}</h1>
+<div id="tournamentdates">
+    <b>Fecha inicio: {{tournament.starting_date}}</b>
+    <b>Fecha Fin: {{tournament.finishing_date}}</b>
+</div>
+<div id="participants">
     <h2>Participantes</h2>
     <ul>
         {{#tournament.participants}}
-            <li><a href="/equipo/{{id}}">{{teamName}}</a>    <a href="/torneo/{{tournament.id}}/borrarequipo/{{id}}"> Eliminar </a></li>
+            <li>
+                <a href="/equipo/{{id}}">{{teamName}}</a>    
+                <a href="/torneo/{{tournament.id}}/borrarequipo/{{id}}"> - Eliminar </a>
+            </li>
         {{/tournament.participants}}
     </ul>
-    <br>
+
     <form action="/torneo/{{tournament.id}}/añadirparticipante" method="post">
 		<label for="nuevoparticipante">Añadir participante</label>
         <select name="participantId" id="nuevoparticipante">
@@ -20,16 +25,17 @@
         </select>
 		<input type='submit' value='Enviar'/>
 	</form>
-    <br>
-	<h2>Partidos</h2>
+</div>
+<div id="matches">
+    <h2>Partidos</h2>
     <table>
         <tr>
-            <td>
-                <th>Equipo 1 </th>
-                <th>Equipo 2 </th>
-                <th>Resultados</th>
-                <th>Fecha</th>
-            </td>
+            <th> </th>
+            <th>Equipo 1 </th>
+            <th>Equipo 2 </th>
+            <th>Resultados</th>
+            <th>Fecha</th>
+            <th> </th>
         </tr>
         {{#games}}
         <tr>
@@ -42,7 +48,7 @@
         </tr>
         {{/games}}
     </table>
-    <br>
+
     <form action="/torneo/{{tournament.id}}/añadirpartido" method="post">
 		<label for="equipo1">Equipo 1</label>
         <select name="localTeamId" id="equipo1">
@@ -56,11 +62,17 @@
                 <option value="{{id}}">{{teamName}}</option>
             {{/tournament.participants}}             
         </select>
+        <label for="date">Fecha</label>
         <input type='date' name="gameDate" min="{{tournament.starting_date}}" max="{{tournament.finishing_date}}" value="{{tournament.starting_date}}">
 		<input type='submit' value='Enviar'/>
 	</form>
-    <br>
-    <a href="/torneos">Volver a la lista de torneos</a>
-    <br>
-    <a href="/torneo/{{tournament.id}}/borrar">Borrar torneo</a>
-    {{>footer}}
+</div>
+<nav>
+	<div class="control">
+        <a href="/torneos">Volver a la lista de torneos</a>
+
+        <a href="/torneo/{{tournament.id}}/borrar">Borrar torneo</a>
+	</div>
+</nav>
+
+{{>footer}}

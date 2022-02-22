@@ -1,24 +1,28 @@
 {{>header}}
 
-<h1>{{team.teamName}}</h1><br>
+<h1 id="teams">{{team.teamName}}</h1>
 
+<div id="teaminfo">
     <p>Años: {{team.years}}</p><br>
-    <h2>Jugadores</h2><br>
+</div>
+
+<div id="teamplayers">
+    <h2>Jugadores</h2>
     <ul>
-        {{#team.players}}
-            <li><a href="/jugador/{{id}}">{{nickName}}</a></li>
-        {{/team.players}}
+    {{#team.players}}
+        <li>
+            <a href="/jugador/{{id}}">{{nickName}}</a>
+        </li>
+    {{/team.players}}
     </ul>
-    <br>
-
-    <a href="/equipo/{{team.id}}/editar">Editar equipo</a>
-    <br>
-    <br>
-
-    <a href="/equipo/{{team.id}}/borrar">Eliminar equipo</a>
-    <br>
-    <br>
-
-    <a href="/equipos">Volver a la lista de equipos</a>
-
-    {{>footer}}
+</div>
+    
+<nav>
+	<div class="control">
+        <a href="/equipo/{{team.id}}/editar">Editar equipo</a>
+        <a href="/equipos">Volver a la lista de equipos</a>
+        <a href="/equipo/{{team.id}}/borrar">Eliminar equipo</a>
+    </div>
+</nav>    
+            
+{{>footer}}

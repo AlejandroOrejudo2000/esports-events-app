@@ -1,12 +1,15 @@
 {{>header}}
 
-<h1>{{product.productName}}</h1><br>
+<h1 id="products">{{product.productName}}</h1>
 
-    <p>Precio: {{product.price}}</p><br>
+<div id="productinfo">
+    <p>Precio: {{product.price}}</p>
+</div>    
 
-    <a href="/producto/{{product.id}}/borrar">Eliminar producto</a>
-    <br><br>
-
-    <a href="/productos">Volver a la lista de productos</a>
-
+<nav>
+	<div class="control">
+        <a href="/producto/{{product.id}}/borrar">Eliminar producto</a>
+        <a href="/productos">Volver a la lista de productos</a>
+	</div>
+</nav>
 {{>footer}}
