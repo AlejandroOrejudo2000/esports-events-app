@@ -1,0 +1,65 @@
+@startuml
+
+package "Secciones"{
+    component Principal as pcp
+    component ListaDeTorneos as trnlist
+    component ListaDeEquipos as eqplist
+    component ListaDejugadores as juglist    
+    component ListaDeProductos as prodlist
+    component Registrarse as reg
+}
+
+component Torneo as trn
+component Equipo as eqp
+component Jugador as jug
+component Producto as prd
+
+component CrearTorneo as creartrn
+component CrearEquipo as creareqp
+component CrearJugador as crearjug
+component CrearProducto as crearprod
+
+component TorneoCreado as trncreado
+component EquipoCreado as eqpcreado
+component JugadorCreado as jugcreado
+component productoCreado as prodcreado
+
+component EditarJugador as editjug
+component EditarEquipo as editeqp
+
+
+trnlist <--> trn
+trnlist --> creartrn
+creartrn --> trncreado
+trncreado --> trn
+trncreado --> trnlist
+
+
+
+eqplist <--> eqp
+eqplist --> creareqp
+creareqp --> eqpcreado
+eqpcreado --> eqp
+eqpcreado --> eqplist
+
+eqp <--> editeqp
+
+
+
+juglist <--> jug
+juglist --> crearjug
+crearjug --> jugcreado
+jugcreado --> jug
+jugcreado --> juglist
+jug <--> editjug
+
+prodlist <--> prd
+prodlist --> crearprod
+crearprod --> prodcreado
+prodcreado --> prd
+prodcreado --> prodlist
+
+trn --> eqp
+eqp <--> jug
+
+@enduml

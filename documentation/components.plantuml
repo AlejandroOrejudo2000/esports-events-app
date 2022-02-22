@@ -1,0 +1,46 @@
+@startuml components
+package "Control"{
+    component MainController as mainctrl
+    component PlayerController as playerctrl
+    component ProductController as prodctrl
+    component TeamController as teamctrl
+    component TournamentController as tourctrl
+    component UserController as userctrl
+}
+
+package "Service"{
+    component DataBaseInitializer as dbserv
+    component PlayerService as playerserv
+    component ProductService as prodserv
+    component TeamService as teamserv
+    component TournamentService as tourserv
+    component UserService as userserv
+}
+
+package "Repository"{
+    component GameRepository as gamerep
+    component PlayerRepository as playerrep
+    component ProductRepository as prodrep
+    component TeamRepository as teamrep
+    component TournamentRepository as tourrep
+    component UserRepository as userrep
+}
+
+playerctrl --> playerserv
+playerctrl --> teamserv
+teamctrl --> teamserv
+prodctrl --> prodserv
+tourctrl --> tourserv
+userctrl --> userserv
+
+playerserv --> playerrep
+playerserv --> teamserv
+prodserv --> prodrep
+teamserv --> teamrep
+tourserv --> tourrep
+tourserv--> gamerep
+tourserv --> teamserv
+userserv --> userrep
+
+
+@enduml
