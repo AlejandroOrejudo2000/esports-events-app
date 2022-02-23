@@ -1,9 +1,6 @@
 package es.urjc.dad.leaguesports.model;
 
-//#region External dependences
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -13,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-//#endregion
+
 import javax.persistence.PreRemove;
 
 @Entity
@@ -21,7 +18,7 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    private long id;
 
     @Column
     private String teamName;
@@ -45,13 +42,12 @@ public class Team {
     protected Team() {
     }
 
-    //#region Getters & Setters
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getTeamName() {
@@ -77,7 +73,6 @@ public class Team {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
-    //#endregion
 
     public void addPlayer(Player player){
         players.add(player);

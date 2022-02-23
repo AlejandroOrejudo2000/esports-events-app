@@ -14,7 +14,7 @@ public class User {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    private long id;
 
     @Column
     private String userName;
@@ -33,14 +33,12 @@ public class User {
     protected User() {
     }
 
-    //#region Getters & Setters
-
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
     
     public String getUserName() {
@@ -58,8 +56,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    //#endregion
 
     @Override
     public String toString() {

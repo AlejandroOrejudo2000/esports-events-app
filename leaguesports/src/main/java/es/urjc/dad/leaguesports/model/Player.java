@@ -1,20 +1,18 @@
 package es.urjc.dad.leaguesports.model;
 
-//#region external dependences
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-//#endregion
 
 @Entity
 public class Player {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    private long id;
 
     @Column
     private String firstName;
@@ -49,10 +47,8 @@ public class Player {
     protected Player() {
     }
 
-    //#region Getters & Setters
-
     public long getId() {
-        return Id;
+        return id;
     }
 
     public String getFirstName() {
@@ -96,7 +92,7 @@ public class Player {
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNationality() {
@@ -112,10 +108,8 @@ public class Player {
         this.team = team;
     }
 
-    //#endregion
-
     @Override
     public String toString() {
-        return "Player (" + Id + ") [" + nickName + " (" + firstName + " " + lastName + ")]";
+        return "Player (" + id + ") [" + nickName + " (" + firstName + " " + lastName + ")]";
     }
 }

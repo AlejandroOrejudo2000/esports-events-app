@@ -2,9 +2,9 @@ package es.urjc.dad.leaguesports.model;
 
 public enum GameResults {
     None,
-    localWins,
+    LocalWins,
     visitorWins,
-    draw;
+    Draw;
 
     @Override
     public String toString(){

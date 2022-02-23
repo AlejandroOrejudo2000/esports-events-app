@@ -14,10 +14,8 @@ import javax.persistence.MapsId;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
 @IdClass(GameId.class)
-
 public class Game {
     
     @Id

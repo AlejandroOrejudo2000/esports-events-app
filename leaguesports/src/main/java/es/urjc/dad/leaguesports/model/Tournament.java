@@ -19,7 +19,7 @@ public class Tournament{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    private long id;
 
     @Column
     private String name;
@@ -64,7 +64,11 @@ public class Tournament{
     }
     
     public long getId() {
-        return Id;
+        return id;
+    }
+
+    public void setId(long id){
+        this.id = id;
     }
 
     public List<Game> getGames() {

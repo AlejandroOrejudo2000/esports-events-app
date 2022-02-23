@@ -15,8 +15,6 @@ import es.urjc.dad.leaguesports.model.Player;
 import es.urjc.dad.leaguesports.services.PlayerService;
 import es.urjc.dad.leaguesports.services.TeamService;
 
-
-
 @Controller
 public class PlayerController {
 
@@ -30,7 +28,6 @@ public class PlayerController {
     public String showPlayers(Model model, Pageable page) {   
 
         Page<Player> playerPage = playerService.getAllPlayers(page);
-
         model.addAttribute("playerlist", playerPage);
         model.addAttribute("hasprevious", playerPage.hasPrevious());
         model.addAttribute("hasnext", playerPage.hasNext());

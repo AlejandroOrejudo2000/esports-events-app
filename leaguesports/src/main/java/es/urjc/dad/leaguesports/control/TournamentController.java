@@ -81,7 +81,6 @@ public class TournamentController {
             System.out.println(e.getMessage());
             return "redirect:/torneos";
         } 
-        
     }
 
     @GetMapping("/torneo/{id}/borrarequipo/{teamid}")
