@@ -83,3 +83,19 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 - ___Registro de usuarios:___ Muestra un formulario para crear un nuevo usuario con un nombre y una contraseña. Al enviar el formulario se creará el usuario y se volverá a la pantalla principal. Esta sección será reemplazada por un sistema de registro y login de usuarios.
 
 ![CrearUsuario](/documentation/pantallas/crearusuario.PNG)
+
+---
+## Diagrama de navegación
+![DiagramaER](/documentation/diagramas/navegacion.png)
+
+---
+## Diagrama de clases UML
+![DiagramaUML](/documentation/diagramas/components.png)
+
+## Diagrama de modelo de datos
+### Diagrama E/R
+![DiagramaER](/documentation/diagramas/diagramaER.png)
+
+### Diagrama relacional
+![DiagramaRelacional](/documentation/diagramas/model.png)
+
