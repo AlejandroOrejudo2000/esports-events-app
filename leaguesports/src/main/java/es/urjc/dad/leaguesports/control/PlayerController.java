@@ -16,7 +16,7 @@ import es.urjc.dad.leaguesports.services.PlayerService;
 import es.urjc.dad.leaguesports.services.TeamService;
 
 @Controller
-public class PlayerController {
+public class PlayerController extends BaseController{
 
     @Autowired
     private PlayerService playerService;

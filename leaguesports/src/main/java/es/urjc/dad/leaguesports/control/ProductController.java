@@ -16,7 +16,7 @@ import es.urjc.dad.leaguesports.services.ProductService;
 
 
 @Controller
-public class ProductController {
+public class ProductController extends BaseController{
 
     @Autowired
     private ProductService productService;

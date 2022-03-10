@@ -14,7 +14,7 @@ import es.urjc.dad.leaguesports.services.TeamService;
 import es.urjc.dad.leaguesports.model.Team;
 
 @Controller
-public class TeamController{
+public class TeamController extends BaseController{
 
     @Autowired
     private TeamService teamService;

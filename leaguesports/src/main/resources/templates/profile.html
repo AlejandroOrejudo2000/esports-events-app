@@ -1,0 +1,12 @@
+{{>header}}
+
+{{#user_logged}}
+    <p> {{user_name}} </p>
+    <a href="/logout"> Cerrar sesión </a>
+{{/user_logged}}
+
+{{^user_logged}}
+    <a href="/login"> Iniciar sesión </a>
+{{/user_logged}}
+
+{{>footer}}

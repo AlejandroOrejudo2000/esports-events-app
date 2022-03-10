@@ -17,7 +17,12 @@
                     <li id="productos"><a href="/productos">Productos</a></li>
                 </ul>
             </nav>
-            <a href="/login">Login</a><br>
+            {{#user_logged}}
+                <a href="/profile"> {{user_name}} </a> 
+            {{/user_logged}}
+            {{^user_logged}}
+                <a href="/login"> Login </a>
+            {{/user_logged}}
         </div>
     </header>
     <main class="main container">

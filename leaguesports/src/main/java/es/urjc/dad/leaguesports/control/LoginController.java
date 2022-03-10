@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginController {
+public class LoginController extends BaseController{
     
     @GetMapping("/login")
     public String login(){
@@ -20,6 +20,13 @@ public class LoginController {
     public String _private(){
         return "redirect:/";
     }
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "profile";
+    }
+
+
 
 
 }

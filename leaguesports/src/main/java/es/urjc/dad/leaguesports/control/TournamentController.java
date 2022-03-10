@@ -18,7 +18,7 @@ import es.urjc.dad.leaguesports.model.Tournament;
 import es.urjc.dad.leaguesports.services.TournamentService;
 
 @Controller
-public class TournamentController {
+public class TournamentController extends BaseController{
 
 	@Autowired
     private TournamentService tournamentService;
