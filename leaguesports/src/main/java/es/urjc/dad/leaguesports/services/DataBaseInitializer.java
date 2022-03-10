@@ -6,11 +6,13 @@ import java.util.Random;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.urjc.dad.leaguesports.model.Player;
 import es.urjc.dad.leaguesports.model.Team;
 import es.urjc.dad.leaguesports.model.Tournament;
+import es.urjc.dad.leaguesports.model.User;
 import es.urjc.dad.leaguesports.model.Product;
 
 @Service
@@ -20,11 +22,14 @@ public class DataBaseInitializer {
     @Autowired private TeamService teamService;
     @Autowired private TournamentService tournamentService;
     @Autowired private ProductService productService;
+    @Autowired private UserService userService;
+    @Autowired private PasswordEncoder encoder;
 
     private final int NUM_PLAYERS = 100;
     private final int NUM_TEAMS = 20;
     private final int NUM_TOURNAMENTS = 40;
     private final int NUM_PRODUCTS = 10;
+    private final int NUM_USERS = 5;
 
     @PostConstruct
     private void initDatabase()
@@ -45,6 +50,10 @@ public class DataBaseInitializer {
         for(int i = 0; i < NUM_PRODUCTS; i++) {
         	productService.addProduct(new Product("Producto prueba " + i, i * 10));
         }     
+
+        for(int i = 0; i < NUM_USERS; i++) {
+        	userService.addUser(new User("User"+i, encoder.encode("pass")));
+        } 
 
     }
 }
