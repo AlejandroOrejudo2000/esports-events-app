@@ -16,17 +16,9 @@ public class LoginController extends BaseController{
         return "loginerror";
     }
 
-    @GetMapping("/private") 
-    public String _private(){
-        return "redirect:/";
-    }
-
     @GetMapping("/profile")
     public String profile(){
         return "profile";
     }
-
-
-
 
 }
