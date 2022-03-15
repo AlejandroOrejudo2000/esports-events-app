@@ -1,6 +1,7 @@
 package es.urjc.dad.leaguesports.control;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,11 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    @GetMapping("/nuevousuario")
+    public String newUser(){
+        return "createuser";
+    }
+
     @PostMapping("/usuario/nuevo")
     public String addUser(Model model, User user){
     	

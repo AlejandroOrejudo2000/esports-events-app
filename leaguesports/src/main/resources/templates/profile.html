@@ -1,8 +1,11 @@
 {{>header}}
 
 {{#user_logged}}
-    <p> {{user_name}} </p>
-    <a href="/logout"> Cerrar sesión </a>
+<p> {{user_name}} </p>
+<form action="/logout" method="post">
+    <input type='submit' value='Cerrar sesión'/>
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+</form> 
 {{/user_logged}}
 
 {{^user_logged}}

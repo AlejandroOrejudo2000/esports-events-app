@@ -47,6 +47,11 @@ public class PlayerController extends BaseController{
         return "player";    
     }
 
+    @GetMapping("/nuevojugador")
+    public String newPlayer(){
+        return "createplayer";
+    }
+
     @PostMapping("/jugador/nuevo")
     public String addPlayer(Model model, Player player){
       

@@ -51,6 +51,11 @@ public class TournamentController extends BaseController{
         return "tournament";
     }
 
+    @GetMapping("/nuevotorneo")
+    public String newTournament(){
+        return "createtournament";
+    }
+
     @PostMapping("/torneo/nuevo")
     public String addTournament(Model model, String tournamentName, String startDate, String endDate){   
 

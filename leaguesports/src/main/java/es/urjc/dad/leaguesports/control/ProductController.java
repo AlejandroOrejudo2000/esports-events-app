@@ -44,6 +44,11 @@ public class ProductController extends BaseController{
         return "product";    
     }
 
+    @GetMapping("/nuevoproducto")
+    public String newProduct(){
+        return "createproduct";
+    }
+
     @PostMapping("/producto/nuevo")
     public String addProduct(Model model, Product product){
     	

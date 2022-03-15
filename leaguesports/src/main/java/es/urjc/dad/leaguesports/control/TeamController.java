@@ -42,6 +42,11 @@ public class TeamController extends BaseController{
         return "team";
     }
 
+    @GetMapping("/nuevoequipo")
+    public String newTeam(){
+        return "createteam";
+    }
+
     @PostMapping("/equipo/nuevo")
     public String addTeam(Model model, Team team){
     

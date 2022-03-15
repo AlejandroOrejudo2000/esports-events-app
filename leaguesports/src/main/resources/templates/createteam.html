@@ -10,8 +10,9 @@
 			<input type='text' name='teamName'/>
 			<p>Años:</p>
 			<input type='number' name='years'/>	
-			<br>
+			<br>			
 			<input type='submit' value='Enviar'/>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>
 	</div>
 </body>

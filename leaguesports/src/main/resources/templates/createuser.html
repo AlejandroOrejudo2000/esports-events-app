@@ -14,8 +14,9 @@
 			<p> &nbsp Contraseña:</p>
 			<input type='text' name='password'/>
 			<br>
-			<br>
+			<br>			
 			<input type='submit' value='Enviar'/>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>
 	</div>
 </body>
