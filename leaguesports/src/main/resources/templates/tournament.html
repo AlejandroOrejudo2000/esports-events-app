@@ -24,6 +24,7 @@
             {{/nonparticipants}}
         </select>
 		<input type='submit' value='Enviar'/>
+        <input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
 </div>
 <div id="matches">
@@ -65,6 +66,7 @@
         <label for="date">Fecha</label>
         <input type='date' name="gameDate" min="{{tournament.starting_date}}" max="{{tournament.finishing_date}}" value="{{tournament.starting_date}}">
 		<input type='submit' value='Enviar'/>
+        <input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
 </div>
 <nav>

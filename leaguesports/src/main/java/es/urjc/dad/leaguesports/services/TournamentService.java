@@ -29,7 +29,7 @@ public class TournamentService {
     @Autowired private TeamService teamService;
 
     public Tournament createTournament(String tournamentName, String startDateString, String endDateString) throws ParseException{
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date startDate = formatter.parse(startDateString);
         Date endDate = formatter.parse(endDateString);
 
@@ -110,7 +110,7 @@ public class TournamentService {
         Optional<Team> localTeam = teamService.getTeamById(localTeamId);
         Optional<Team> visitorTeam = teamService.getTeamById(visitorTeamId);
         if(tournament.isPresent() && localTeam.isPresent() && visitorTeam.isPresent()) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             Date date = formatter.parse(dateString);
             Tournament t = tournament.get();
             Game game = new Game(t, localTeam.get(), visitorTeam.get(), date);
