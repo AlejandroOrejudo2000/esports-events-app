@@ -24,15 +24,19 @@ public class User {
     @Column
     private String password;
 
+    @Column
+    private String email;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
     
     @OneToMany(mappedBy =  "user")
     private List<Product> products;
 
-    public User(String userName, String password) {        
+    public User(String userName, String password, String email) {        
         this.userName = userName;
         this.password = password;
+        this.email = email;
     }
 
     protected User() {
@@ -73,6 +77,14 @@ public class User {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 	
 }

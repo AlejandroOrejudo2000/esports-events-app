@@ -2,6 +2,7 @@
 
 {{#user_logged}}
 <p> {{user_name}} </p>
+<p> {{email}} </p>
 <form action="/logout" method="post">
     <input type='submit' value='Cerrar sesión'/>
     <input type="hidden" name="_csrf" value="{{token}}"/>

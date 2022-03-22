@@ -11,18 +11,28 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import es.urjc.dad.leaguesports.model.User;
 import es.urjc.dad.leaguesports.repositories.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService{
 	
-	@Autowired private UserRepository userRepository;
+	@Autowired private UserRepository userRepository;    
+
+    public User registerUser(String userName, String password, String email){
+        User user = new User(userName, password, email);
+        return user;
+    }
 
     public void addUser(User user) {
-
+        
         userRepository.save(user);
+    }
+
+    public boolean checkIfUserExists(String name){
+        Optional<User> user = userRepository.findByUserName(name);
+        if (user.isPresent()) return true;
+        else return false;
     }
 
     public Optional<User> getUserbyName(String name){

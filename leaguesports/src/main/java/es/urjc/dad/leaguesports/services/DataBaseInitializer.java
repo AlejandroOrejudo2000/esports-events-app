@@ -30,6 +30,7 @@ public class DataBaseInitializer {
     private final int NUM_TOURNAMENTS = 40;
     private final int NUM_PRODUCTS = 10;
     private final int NUM_USERS = 5;
+    private final String DEFAULT_EMAIL = "lolesports.web@gmail.com";
 
     @PostConstruct
     private void initDatabase()
@@ -52,7 +53,7 @@ public class DataBaseInitializer {
         }     
 
         for(int i = 0; i < NUM_USERS; i++) {
-        	userService.addUser(new User("User"+i, encoder.encode("pass")));
+        	userService.addUser(new User("User"+i, encoder.encode("pass"), DEFAULT_EMAIL));
         } 
 
     }
