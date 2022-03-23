@@ -13,6 +13,7 @@ import es.urjc.dad.leaguesports.model.Player;
 import es.urjc.dad.leaguesports.model.Team;
 import es.urjc.dad.leaguesports.model.Tournament;
 import es.urjc.dad.leaguesports.model.User;
+import es.urjc.dad.leaguesports.model.UserRoles;
 import es.urjc.dad.leaguesports.model.Product;
 
 @Service
@@ -41,6 +42,7 @@ public class DataBaseInitializer {
 
         for(int i = 0; i < NUM_USERS; i++) {
             User user = new User("User"+i, encoder.encode("pass"), DEFAULT_EMAIL);
+            user.addRole(UserRoles.User);
         	userService.addUser(user);
             for (int j = 0; j < TEAMS_PER_USER; j++) {
                 Team team = new Team("Team " + (j + i * TEAMS_PER_USER), new Random().nextInt(20));

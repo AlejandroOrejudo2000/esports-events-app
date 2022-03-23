@@ -19,11 +19,6 @@ public class UserService implements UserDetailsService{
 	
 	@Autowired private UserRepository userRepository;    
 
-    public User registerUser(String userName, String password, String email){
-        User user = new User(userName, password, email);
-        return user;
-    }
-
     public void addUser(User user) {
         
         userRepository.save(user);
@@ -53,7 +48,7 @@ public class UserService implements UserDetailsService{
         List<GrantedAuthority> roles = new ArrayList<>();
         for (String role : user.getRoles()) {
             roles.add(new SimpleGrantedAuthority(role));
-        }
+        }      
 
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), roles);
    

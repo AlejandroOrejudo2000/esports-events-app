@@ -101,10 +101,13 @@ public class Player {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
-    }    
+    } 
+    
+    public Team getTeam(){
+        return this.team;
+    }   
 
-    public void setTeam(Team team)
-    {
+    public void setTeam(Team team) {
         this.team = team;
     }
 

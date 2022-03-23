@@ -1,6 +1,9 @@
 package es.urjc.dad.leaguesports.control;
 
+import java.security.Principal;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import es.urjc.dad.leaguesports.model.Player;
+import es.urjc.dad.leaguesports.model.Team;
 import es.urjc.dad.leaguesports.services.PlayerService;
 import es.urjc.dad.leaguesports.services.TeamService;
 
@@ -37,12 +41,21 @@ public class PlayerController extends BaseController{
     }
 
     @GetMapping("/jugador/{id}")
-    public String showPlayerDetails(Model model, @PathVariable long id) {
+    public String showPlayerDetails(Model model, HttpServletRequest request, @PathVariable long id) {
 
         Optional<Player> player = playerService.getPlayerById(id);
         if(player.isPresent()) {
-            model.addAttribute("player", player.get());   
-            model.addAttribute("teams", teamService.getAllTeams());                            
+            Boolean isOwner = false;
+            Principal userPrincipal = request.getUserPrincipal();            
+            model.addAttribute("player", player.get());  
+            if (userPrincipal != null){
+                Team team = player.get().getTeam();
+                if (team != null && team.getUser().getUserName().equals(userPrincipal.getName())){
+                    isOwner = true;
+                }
+                model.addAttribute("teams", teamService.getUserTeams(userPrincipal.getName()));
+            } 
+            model.addAttribute("isOwner", isOwner);            
         }      
         return "player";    
     }

@@ -16,13 +16,13 @@
     {{/team.players}}
     </ul>
 </div>
-    {{#isOwner}}    
+        
         <nav>
             <div class="control">
-                <a href="/equipo/{{team.id}}/editar">Editar equipo</a>
+                {{#isOwner}}<a href="/equipo/{{team.id}}/editar">Editar equipo</a>{{/isOwner}} 
                 <a href="/equipos">Volver a la lista de equipos</a>
-                <a href="/equipo/{{team.id}}/borrar">Eliminar equipo</a>
+                {{#isOwner}}<a href="/equipo/{{team.id}}/borrar">Eliminar equipo</a>{{/isOwner}} 
             </div>
         </nav>    
-    {{/isOwner}}                
+                   
 {{>footer}}

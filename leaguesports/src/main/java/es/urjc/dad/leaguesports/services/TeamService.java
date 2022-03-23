@@ -1,5 +1,6 @@
 package es.urjc.dad.leaguesports.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,12 +10,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import es.urjc.dad.leaguesports.model.Team;
+import es.urjc.dad.leaguesports.model.User;
 import es.urjc.dad.leaguesports.repositories.TeamRepository;
 
 @Service
 public class TeamService {
     
     @Autowired private TeamRepository teamRepository;
+    @Autowired private UserService userService;
 
     public List<Team> getAllTeams(){
         List<Team> teams = teamRepository.findAll();
@@ -25,6 +28,19 @@ public class TeamService {
 
         Page<Team> teams = teamRepository.findAll(page);
         return teams;
+    }
+
+    public List<Team> getUserTeams(String userName){
+        List<Team> teams = teamRepository.findAll();
+        List<Team> userTeams = new ArrayList<>();
+        Optional<User> u = userService.getUserbyName(userName);
+        if(u.isPresent()){
+            for (Team team : teams) {
+                if(team.getUser().equals(u.get()))
+                    userTeams.add(team);
+            }
+        }        
+        return userTeams;
     }
 
     public Optional<Team> getTeamById(long id){

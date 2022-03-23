@@ -1,5 +1,6 @@
 package es.urjc.dad.leaguesports.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -40,6 +41,7 @@ public class User {
         this.userName = userName;
         this.password = password;
         this.email = email;
+        roles = new ArrayList<>();
     }
 
     protected User() {
@@ -78,8 +80,17 @@ public class User {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void addRole(UserRoles role){
+        if(!roles.contains(role.toString()))
+            roles.add(role.toString());
+    }
+
+    public void removeRole(UserRoles role){
+        roles.remove(role.toString());
+    }
+
+    public boolean hasRole(UserRoles role){
+        return roles.contains(role.toString());
     }
 
     public String getEmail() {

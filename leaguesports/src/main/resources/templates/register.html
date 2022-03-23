@@ -8,12 +8,15 @@
 	<div class="form">
 		<form action="/usuario/nuevo" method="post">
 			<p> &nbsp Usuario: </p>
-			<input type='text' name='userName'/>
-			<br>
+			<input type='text' name='userName'/><br>			
 			<p> &nbsp Contraseña:</p>
-			<input type='text' name='password'/>
-			<br>
-			<input type='text' name='email'/>		
+			<input type='text' name='password'/><br>			
+			<p> &nbsp E-mail:</p>
+			<input type='text' name='email'/><br>			
+			<label> Organizador:</label>					
+			<input type="checkbox" name='organizer'/><br>
+			<label> Administrador:</label>					
+			<input type="checkbox" name='admin'/><br>
 			<input type='submit' value='Enviar'/>
 			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>

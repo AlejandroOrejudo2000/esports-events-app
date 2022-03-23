@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import es.urjc.dad.leaguesports.model.UserRoles;
 import es.urjc.dad.leaguesports.services.UserService;
 
 @Configuration
@@ -32,7 +33,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         
         // String encodedPassword = encoder.encode("pass");
-        auth.inMemoryAuthentication().withUser(user).password("{bcrypt}"+pass).roles("USER");
+        auth.inMemoryAuthentication()
+            .withUser(user)
+            .password("{bcrypt}"+pass)
+            .roles( UserRoles.User.toString(), UserRoles.Admin.toString());
         auth.userDetailsService(userService).passwordEncoder(encoder());
     }
 
