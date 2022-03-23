@@ -26,22 +26,34 @@ public class DataBaseInitializer {
     @Autowired private PasswordEncoder encoder;
 
     private final int NUM_PLAYERS = 100;
-    private final int NUM_TEAMS = 20;
+    private final int NUM_USERS = 5;
+    private final int TEAMS_PER_USER = 20;
     private final int NUM_TOURNAMENTS = 40;
     private final int NUM_PRODUCTS = 10;
-    private final int NUM_USERS = 5;
+    
     private final String DEFAULT_EMAIL = "lolesports.web@gmail.com";
+
+    private Team[] teams = new Team[NUM_USERS * TEAMS_PER_USER];
 
     @PostConstruct
     private void initDatabase()
     {
-        for(int i = 0; i < NUM_TEAMS; i++){
-            teamService.addTeam(new Team("Team " + i, new Random().nextInt(20)));
-        }
+
+        for(int i = 0; i < NUM_USERS; i++) {
+            User user = new User("User"+i, encoder.encode("pass"), DEFAULT_EMAIL);
+        	userService.addUser(user);
+            for (int j = 0; j < TEAMS_PER_USER; j++) {
+                Team team = new Team("Team " + (j + i * TEAMS_PER_USER), new Random().nextInt(20));
+                team.setUser(user);
+                teamService.addTeam(team);
+                teams[j+i*TEAMS_PER_USER] = team;
+            }
+        } 
 
         for(int i = 0; i < NUM_PLAYERS; i++) {
-            playerService.addPlayer(new Player("Nombre " + i, "Apellido " + i, "Nickname " + i, i % 2 == 0? "Hombre":"Mujer", i % 10 + 20, "España"));
-            playerService.setPlayerTeam(i, new Random().nextInt(NUM_TEAMS + 10));
+            Player player = new Player("Nombre " + i, "Apellido " + i, "Nickname " + i, i % 2 == 0? "Hombre":"Mujer", i % 10 + 20, "España");
+            player.setTeam(teams[new Random().nextInt(NUM_USERS * TEAMS_PER_USER)]);
+            playerService.addPlayer(player);
         }      
         
         for(int i = 0; i < NUM_TOURNAMENTS; i++){
@@ -52,9 +64,7 @@ public class DataBaseInitializer {
         	productService.addProduct(new Product("Producto prueba " + i, i * 10));
         }     
 
-        for(int i = 0; i < NUM_USERS; i++) {
-        	userService.addUser(new User("User"+i, encoder.encode("pass"), DEFAULT_EMAIL));
-        } 
+        
 
     }
 }

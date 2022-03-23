@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import javax.persistence.PreRemove;
@@ -31,6 +32,9 @@ public class Team {
 
     @ManyToMany(mappedBy = "participants")
     private List<Tournament> tournaments;   
+
+    @ManyToOne
+    private User user;
 
 
     public Team(String teamName, int years) {
@@ -94,5 +98,13 @@ public class Team {
                     tournament.removeGame(game);
             }          
         }
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

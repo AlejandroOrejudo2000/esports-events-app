@@ -1,6 +1,10 @@
 package es.urjc.dad.leaguesports.control;
 
+import java.security.Principal;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,13 +15,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
 import es.urjc.dad.leaguesports.services.TeamService;
+import es.urjc.dad.leaguesports.services.UserService;
 import es.urjc.dad.leaguesports.model.Team;
+import es.urjc.dad.leaguesports.model.User;
 
 @Controller
 public class TeamController extends BaseController{
 
-    @Autowired
-    private TeamService teamService;
+    @Autowired private TeamService teamService;
+    @Autowired private UserService userService;
 
     @GetMapping("/equipos")
     public String showTeams(Model model, Pageable page) {
@@ -34,10 +40,20 @@ public class TeamController extends BaseController{
     }
 
     @GetMapping("/equipo/{id}")
-    public String showTeamDetails(Model model, @PathVariable long id){
+    public String showTeamDetails(Model model, HttpServletRequest request, @PathVariable long id){
+        
         Optional<Team> team = teamService.getTeamById(id);
         if(team.isPresent()) {
+            Boolean isOwner = false;
             model.addAttribute("team", team.get());
+            Principal userPrincipal = request.getUserPrincipal();
+            if (userPrincipal != null){
+                User u = team.get().getUser();
+                if(u != null && u.getUserName().equals(userPrincipal.getName())){
+                    isOwner = true;
+                }
+            }
+            model.addAttribute("isOwner", isOwner);
         }
         return "team";
     }
@@ -50,6 +66,11 @@ public class TeamController extends BaseController{
     @PostMapping("/equipo/nuevo")
     public String addTeam(Model model, Team team){
     
+        String username = model.getAttribute("user_name").toString();
+        Optional<User> u = userService.getUserbyName(username);
+        if(u.isPresent()){
+            team.setUser(u.get());
+        }
         teamService.addTeam(team);
         model.addAttribute("id", (int)team.getId());
         return "teamcreated";

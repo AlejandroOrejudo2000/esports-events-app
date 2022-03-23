@@ -33,6 +33,9 @@ public class User {
     @OneToMany(mappedBy =  "user")
     private List<Product> products;
 
+    @OneToMany(mappedBy = "user")
+    private List<Team> teams;
+
     public User(String userName, String password, String email) {        
         this.userName = userName;
         this.password = password;
