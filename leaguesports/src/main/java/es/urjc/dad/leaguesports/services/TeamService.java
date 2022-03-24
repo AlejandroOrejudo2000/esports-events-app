@@ -64,7 +64,12 @@ public class TeamService {
     }
 
     public void updateTeam(long id, Team updatedTeam) {
-        updatedTeam.setId(id);
-        teamRepository.save(updatedTeam);
+
+        Optional<Team> team = teamRepository.findById(id);
+        if(team.isPresent()){
+            updatedTeam.setId(id);
+            updatedTeam.setUser(team.get().getUser());
+            teamRepository.save(updatedTeam);
+        }       
     }
 }

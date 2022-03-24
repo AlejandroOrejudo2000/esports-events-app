@@ -14,16 +14,16 @@ import org.springframework.ui.Model;
 
 import es.urjc.dad.leaguesports.model.User;
 import es.urjc.dad.leaguesports.model.UserRoles;
+import es.urjc.dad.leaguesports.services.EmailService;
 import es.urjc.dad.leaguesports.services.UserService;
 
 
 @Controller
 public class UserController {
 
-    @Autowired private PasswordEncoder encoder;
-    
-    @Autowired
-    private UserService userService;
+    @Autowired private PasswordEncoder encoder;    
+    @Autowired private UserService userService;
+    @Autowired private EmailService emailService;
     
     @GetMapping("/usuario/registro")
     public String register(){
@@ -37,6 +37,9 @@ public class UserController {
         if (!userService.checkIfUserExists(userName)){
             User user = new User(userName, encoder.encode(password), email);
             user.addRole(UserRoles.User);
+
+            emailService.SendRegisterEmail(email, userName);
+
             System.out.println(organizer);
             if(organizer != null) user.addRole(UserRoles.Organizer);
             if(admin != null) user.addRole(UserRoles.Admin);
