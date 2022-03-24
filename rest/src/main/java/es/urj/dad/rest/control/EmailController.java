@@ -1,30 +1,30 @@
 package es.urj.dad.rest.control;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.mail.MessagingException;
 
-import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/*public class EmailController {
-	RestTemplate restTemplate = new RestTemplate();
-	String url="https://www.googleapis.com/.../volumes?q=intitle:"+title;
-}*/
+import es.urj.dad.rest.service.EmailService;
+import es.urj.dad.rest.service.PDFService;
 
-class VolumeInfo {
-	 public String title;
+@RestController
+public class EmailController {
+	
+	@Autowired private EmailService emailService;
+	@Autowired private PDFService pdfService;
+	
+    @GetMapping("/email")
+    public void prueba() {
+    	emailService.sendEmail();
+    }
+    
+    
+    @GetMapping("/emailfile")
+    public void segundaPrueba() throws MessagingException {
+    	emailService.sendEmailWithAttachment();
+    }
+    
+    
 }
-
-//Si usasemos Feign Client
-/*@RestController
-public class BooksController {
-@Autowired BooksService service;
-@GetMapping("/booktitles")
-public List<String> getBookTitles(@RequestParam String title) {
-BooksResponse data = service.getBooks("intitle:" + title);
-List<String> bookTitles = new ArrayList<String>();
-for (Book book : data.items) {
-bookTitles.add(book.volumeInfo.title);
-}
-return bookTitles;
-}
-}*/
