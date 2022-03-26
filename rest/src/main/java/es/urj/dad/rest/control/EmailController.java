@@ -1,6 +1,7 @@
 package es.urj.dad.rest.control;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -62,6 +63,21 @@ public class EmailController {
 		}
 		catch (MailException e)  {
 			return ResponseEntity.badRequest().body("Error, dirección de correo incorrecta"); 
+		}
+	}
+
+	@PostMapping("/gametable")
+	public ResponseEntity<String> sendGameTableEmail(@RequestBody Map<String, Object> body){
+		String receiver = (String) body.get("receiver");
+		List<Map<String, Object>> games = (List<Map<String, Object>>) body.get("games");
+		try{			
+			emailService.sendGameTableEmail(receiver, games);
+			return ResponseEntity.ok().body("Email enviado");
+		}
+		catch (MailException e)  {
+			return ResponseEntity.badRequest().body("Error, dirección de correo incorrecta."); 
+		} catch (MessagingException e) {
+			return ResponseEntity.badRequest().body("Error, problema con el envío del mensaje."); 
 		}
 	}
 }

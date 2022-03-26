@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
@@ -85,5 +86,28 @@ public class EmailService {
         
         Object[] params = new Object[]{name, eventName, eventId};
         return MessageFormat.format(EVENT_CONTENT, params);	
+    }
+
+    public void sendGameTableEmail(String receiver, List<Map<String, Object>> games) throws MessagingException {
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+
+        helper.setTo(receiver);
+        helper.setSubject("Partidos");
+
+        List<String[]> serializedGames = csvService.serializeGameData(games);
+        String filepath;
+        try {
+            filepath = csvService.generateCSV(serializedGames);
+            MimeMultipart multipart = new MimeMultipart();
+            MimeBodyPart attachment = new MimeBodyPart();
+            attachment.attachFile(filepath);
+            multipart.addBodyPart(attachment);
+            msg.setContent(multipart);
+        } catch (IOException e) {
+            msg.setText("Lo sentimos, el archivo no se ha podido enviar.");
+        }       
+
+        javaMailSender.send(msg);
     }
 }

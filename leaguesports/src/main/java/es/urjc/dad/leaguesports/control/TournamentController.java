@@ -1,8 +1,11 @@
 package es.urjc.dad.leaguesports.control;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,13 +18,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import es.urjc.dad.leaguesports.model.Team;
 import es.urjc.dad.leaguesports.model.Tournament;
+import es.urjc.dad.leaguesports.model.User;
+import es.urjc.dad.leaguesports.services.EmailService;
 import es.urjc.dad.leaguesports.services.TournamentService;
+import es.urjc.dad.leaguesports.services.UserService;
 
 @Controller
 public class TournamentController extends BaseController{
 
 	@Autowired
     private TournamentService tournamentService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/torneos")
     public String showTournaments(Model model, Pageable page) {   
@@ -49,6 +61,22 @@ public class TournamentController extends BaseController{
             model.addAttribute("games", tournamentService.getGamesOrderByDate(id));
         }
         return "tournament";
+    }
+
+    @GetMapping("/torneo/{id}/csv")
+    public String receiveTournamentTable(Model model, HttpServletRequest request, @PathVariable long id) {
+        Optional<Tournament> tournament = tournamentService.getTournamentById(id);
+        if(tournament.isPresent()) {
+            Principal userPrincipal = request.getUserPrincipal();
+            if(userPrincipal != null){
+                Optional<User> u = userService.getUserbyName(userPrincipal.getName().toString());
+                if(u.isPresent()){
+                    String email = u.get().getEmail();
+                    emailService.SendGameTableEmail(email, tournament.get());
+                }
+            }
+        }
+        return "redirect:/torneos";
     }
 
     @GetMapping("/nuevotorneo")
