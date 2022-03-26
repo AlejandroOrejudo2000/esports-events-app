@@ -1,5 +1,6 @@
 package es.urj.dad.rest.control;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.urj.dad.rest.service.CSVService;
 import es.urj.dad.rest.service.EmailService;
 import es.urj.dad.rest.service.PDFService;
 
@@ -22,6 +24,7 @@ public class EmailController {
 	
 	@Autowired private EmailService emailService;
 	@Autowired private PDFService pdfService;
+	@Autowired private CSVService csvService;
 
 	@GetMapping("/prueba")
     public void prueba() {
@@ -34,11 +37,11 @@ public class EmailController {
     }
 
 	@PostMapping("/registration")
-	public ResponseEntity<String> sendRegistrationEmail(@RequestBody Map<String, String> body){
+	public ResponseEntity<String> sendRegistrationEmail(@RequestBody Map<String, Object> body){
 
-		try{
-			String receiver = body.get("receiver");
-			String username = body.get("username");
+		String receiver = (String) body.get("receiver");
+		String username = (String) body.get("username");
+		try{			
 			emailService.sendRegistrationEmail(receiver, username);
 			return ResponseEntity.ok().body("Email enviado");
 		}
@@ -47,6 +50,18 @@ public class EmailController {
 		}
 	}
 
-
-
+	@PostMapping("/event")
+	public ResponseEntity<String> sendEventEmail(@RequestBody Map<String, Object> body){
+		String receiver = (String) body.get("receiver");
+		String username = (String) body.get("username");
+		String eventName = (String) body.get("eventName");
+		long eventId = (Integer) body.get("eventId");
+		try{			
+			emailService.sendEventEmail(receiver, username, eventName, eventId);
+			return ResponseEntity.ok().body("Email enviado");
+		}
+		catch (MailException e)  {
+			return ResponseEntity.badRequest().body("Error, dirección de correo incorrecta"); 
+		}
+	}
 }

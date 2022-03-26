@@ -86,4 +86,12 @@ public class Tournament{
     public void setParticipants(List<Team> participants) {
         this.participants = participants;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

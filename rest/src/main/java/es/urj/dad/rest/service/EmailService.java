@@ -1,7 +1,15 @@
 package es.urj.dad.rest.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -15,9 +23,13 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 	
     private final String REGISTRATION_SUBJECT = "¡Bienvenido a Leaguesports!";
-    private final String REGISTRATION_CONTENT = "Bienvenido, %%USERNAME%%";
+    private final String REGISTRATION_CONTENT = "Bienvenido, {0}}";
+
+    private final String EVENT_SUBJECT = "¡Novedades de Leaguesports!";
+    private final String EVENT_CONTENT = "Enhorabuena, {0}!\n\nSu equipo ha conseguido insicribirse en el torneo {1}, puede consultar los detalles en https://localhost:8443/torneo/{2} \n";
 
 	@Autowired private JavaMailSender javaMailSender;
+    @Autowired private CSVService csvService;
 	
 	public void sendEmail() {
 
@@ -49,15 +61,29 @@ public class EmailService {
         
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(receiver);
-
         msg.setSubject(REGISTRATION_SUBJECT);
         msg.setText(getRegistrationContent(name));
 
         javaMailSender.send(msg);
     }
 
-    private String getRegistrationContent(String name){
-        return new String(REGISTRATION_CONTENT).replace("%%USERNAME%%", name);
+    public void sendEventEmail(String receiver, String name, String eventName, long eventId){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(receiver);
+        msg.setSubject(EVENT_SUBJECT);
+        msg.setText(getEventContent(name, eventName, eventId));
+
+        javaMailSender.send(msg);
     }
-	
+
+    private String getRegistrationContent(String name){
+        Object[] params = new Object[]{name};
+        return MessageFormat.format(REGISTRATION_CONTENT, params);	
+    }
+
+    private String getEventContent(String name, String eventName, long eventId){
+        
+        Object[] params = new Object[]{name, eventName, eventId};
+        return MessageFormat.format(EVENT_CONTENT, params);	
+    }
 }

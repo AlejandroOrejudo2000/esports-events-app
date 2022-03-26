@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import es.urjc.dad.leaguesports.model.Game;
 import es.urjc.dad.leaguesports.model.Team;
 import es.urjc.dad.leaguesports.model.Tournament;
+import es.urjc.dad.leaguesports.model.User;
 import es.urjc.dad.leaguesports.repositories.GameRepository;
 import es.urjc.dad.leaguesports.repositories.TournamentRepository;
 
@@ -25,7 +26,7 @@ public class TournamentService {
     
     @Autowired private TournamentRepository tournamentRepository;
     @Autowired private GameRepository gameRepository;
-
+    @Autowired private EmailService emailService;
     @Autowired private TeamService teamService;
 
     public Tournament createTournament(String tournamentName, String startDateString, String endDateString) throws ParseException{
@@ -84,6 +85,9 @@ public class TournamentService {
             Tournament t = tournament.get();
             t.addParticipant(team.get());
             tournamentRepository.save(t);
+
+            User user = team.get().getUser();
+            emailService.SendEventEmail(user.getEmail(), user.getUserName(), t.getName(), tournamentId);
         }
     }
 
