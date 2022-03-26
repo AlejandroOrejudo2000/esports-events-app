@@ -1,12 +1,14 @@
 package es.urj.dad.rest.service;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -20,6 +22,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.itextpdf.text.DocumentException;
+
 @Service
 public class EmailService {
 	
@@ -31,29 +35,29 @@ public class EmailService {
 
 	@Autowired private JavaMailSender javaMailSender;
     @Autowired private CSVService csvService;
+    @Autowired private PDFService pdfService;
 	
-	public void sendEmail() {
-
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("wanas74285@f1xm.com");
-
-        msg.setSubject("Prueba correo Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
-
-        javaMailSender.send(msg);
-    }
-	
-    public void sendEmailWithAttachment() throws MessagingException {
+    public void sendEmailWithAttachment() throws MessagingException, FileNotFoundException, DocumentException {
         
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
         
-        helper.setTo("hecoyek688@shopxda.com");
+        helper.setTo("wanas74285@f1xm.com");
         
         helper.setSubject("Prueba 2 correo Spring Boot");
         helper.setText("Email with file \n Spring Boot Email");
             
-        helper.addAttachment("example.txt", new ClassPathResource("example.txt"));
+        String filepath;
+        try {
+            filepath = pdfService.createPDF("Prueba");
+            MimeMultipart multipart = new MimeMultipart();
+            MimeBodyPart attachment = new MimeBodyPart();
+            attachment.attachFile(filepath);
+            multipart.addBodyPart(attachment);
+            msg.setContent(multipart);
+        } catch (IOException e) {
+            msg.setText("Lo sentimos, el archivo no se ha podido enviar.");
+        }
 
         javaMailSender.send(msg);
     }

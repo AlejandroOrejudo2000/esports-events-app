@@ -1,5 +1,6 @@
 package es.urj.dad.rest.control;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itextpdf.text.DocumentException;
+
 import es.urj.dad.rest.service.CSVService;
 import es.urj.dad.rest.service.EmailService;
 import es.urj.dad.rest.service.PDFService;
@@ -25,15 +28,10 @@ public class EmailController {
 	
 	@Autowired private EmailService emailService;
 	@Autowired private PDFService pdfService;
-	@Autowired private CSVService csvService;
-
-	@GetMapping("/prueba")
-    public void prueba() {
-    	emailService.sendEmail();
-    }    
+	@Autowired private CSVService csvService; 
     
     @GetMapping("/file")
-    public void segundaPrueba() throws MessagingException {
+    public void segundaPrueba() throws MessagingException, FileNotFoundException, DocumentException {
     	emailService.sendEmailWithAttachment();
     }
 
