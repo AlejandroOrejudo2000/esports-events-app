@@ -2,6 +2,15 @@
 
 Aplicación web para gestionar elementos relacionados con __eventos de e-sports__. Se podrá acceder de forma pública a información de partidos, entradas, resultados, eventos, jugadores y equipos, noticias sobre eventos y merchandising. 
 
+- [Entidades](#entidades)
+- [Servicio interno](#servicio-interno)
+- [Pantallas](#pantallas)
+- [Diagrama de navegación](#diagrama-de-navegación)
+- [Diagrama de clases](#diagrama-de-clases-uml)
+- [Diagrama de modelo de datos](#diagrama-de-modelo-de-datos)
+- [Instrucciones de ejecución](#instrucciones-de-ejecución)
+
+
 ---
 ## Entidades:
 
@@ -99,3 +108,30 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 ### Diagrama relacional
 ![DiagramaRelacional](/documentation/diagramas/model.png)
 
+## Instrucciones de ejecución
+
+Para ejecutar la aplicación en una máquina virtual con Ubuntu 20 son necesarios los siguientes componentes:
+
+- Java (JRE 11 o superior):
+ > sudo apt install openjdk-11-jre-headless
+- Mysql server
+> sudo apt install mysql-server-8.0
+
+También es necesario crear la base de datos a la que la aplicación se va a conectar. Para ello debemos entrar al entorno de MySQL y ejecutar la sentencia para crear la base de datos.
+> mysql -u root -p <br>
+> create database db_leaguesports; <br>
+
+Para que la aplicación puede acceder a la base de datos tendremos que cambiar la contraseña de MySQL:
+> mysql -u root -p <br>
+> ALTER USER 'user-name'@'localhost' IDENTIFIED BY '1234'; <br>
+> flush privileges; <br>
+> quit; <br>
+
+Si la sentencia alter no funciona, una alternativa es:
+> UPDATE mysql.user SET authentication_string = PASSWORD('1234') WHERE User = 'root' AND Host = 'localhost'; <br>
+
+Con todo instalado, abrimos dos terminales para poder ejecutar tanto la aplicación web como el servicio interno:
+> java -jar leaguesports-0.0.1-SNAPSHOT.jar <br>
+> java -jar rest-0.0.1-SNAPSHOT.jar <br>
+
+(La aplicación puede generar ficheros así que es conveniente guardar los dos ejecutables en una carpeta y ejecutarlos desde ahi).
