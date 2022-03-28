@@ -9,6 +9,8 @@ Aplicación web para gestionar elementos relacionados con __eventos de e-sports_
 - [Diagrama de clases](#diagrama-de-clases-uml)
 - [Diagrama de modelo de datos](#diagrama-de-modelo-de-datos)
 - [Instrucciones de ejecución](#instrucciones-de-ejecución)
+- - [Instrucciones de empaquetado](#instruccioned-de-empaquetado)
+- [Instrucciones de ejecución](#instrucciones-de-ejecución)
 
 
 ---
@@ -107,6 +109,19 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 
 ### Diagrama relacional
 ![DiagramaRelacional](/documentation/diagramas/model.png)
+
+## Instrucciones de empaquetado
+
+- instalar JDK 11 o superior: https://www.oracle.com/es/java/technologies/javase/jdk11-archive-downloads.html
+- Configurar la variable de entorno JAVA_HOME e incluir la carpeta bin en el path
+- Descargar y descomprimir maven: https://maven.apache.org/download.cgi
+- Configurar la variable de entorno MAVEN_HOME e incluir la carpeta bin en el path (o descomprimirla en la carpeta desde la que se empaquete el jar).
+
+- En el directorio de la aplicación (/esports-events.app/leaguesports) ejecutar el siguiente comando:
+> mvn package
+- Si existía anteriormente una carpeta target dentro del directorio, se debe ejecutar este otro comando:
+> mvn clear package
+- Repetir el proceso para generar el archivo .jar del servicio rest. El fichero jar empaquetado se genera en la carpeta /target.
 
 ## Instrucciones de ejecución
 
