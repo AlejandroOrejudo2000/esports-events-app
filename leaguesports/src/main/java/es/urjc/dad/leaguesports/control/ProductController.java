@@ -1,6 +1,9 @@
 package es.urjc.dad.leaguesports.control;
 
+import java.security.Principal;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import es.urjc.dad.leaguesports.model.Product;
+import es.urjc.dad.leaguesports.model.User;
+import es.urjc.dad.leaguesports.services.EmailService;
 import es.urjc.dad.leaguesports.services.ProductService;
+import es.urjc.dad.leaguesports.services.UserService;
 
 
 @Controller
@@ -20,6 +26,12 @@ public class ProductController extends BaseController{
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/productos")
     public String showPlayers(Model model, Pageable page) {   
@@ -63,6 +75,23 @@ public class ProductController extends BaseController{
         productService.removeProduct(id);
         return "redirect:/productos";
     }
+
+    @GetMapping("producto/{id}/comprar")
+    public String buyProduct(Model model, HttpServletRequest request, @PathVariable long id){
+        Optional<Product> product = productService.getProductById(id);
+        if(product.isPresent()){
+            Principal userPrincipal = request.getUserPrincipal();
+            if(userPrincipal != null){
+                Optional<User> u = userService.getUserbyName(userPrincipal.getName().toString());
+                if(u.isPresent()){
+                    String email = u.get().getEmail();
+                    emailService.sendProductEmail(email, product.get());
+                    productService.removeProduct(id);
+                }
+            }
+        }        
+        return "redirect:/productos";
+    }   
     
 }
 

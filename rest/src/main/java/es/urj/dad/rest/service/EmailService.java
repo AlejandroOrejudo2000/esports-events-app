@@ -28,7 +28,7 @@ import com.itextpdf.text.DocumentException;
 public class EmailService {
 	
     private final String REGISTRATION_SUBJECT = "¡Bienvenido a Leaguesports!";
-    private final String REGISTRATION_CONTENT = "Bienvenido, {0}}";
+    private final String REGISTRATION_CONTENT = "Bienvenido, {0}";
 
     private final String EVENT_SUBJECT = "¡Novedades de Leaguesports!";
     private final String EVENT_CONTENT = "Enhorabuena, {0}!\n\nSu equipo ha conseguido insicribirse en el torneo {1}, puede consultar los detalles en https://localhost:8443/torneo/{2} \n";
@@ -112,6 +112,28 @@ public class EmailService {
             msg.setText("Lo sentimos, el archivo no se ha podido enviar.");
         }       
 
+        javaMailSender.send(msg);
+    }
+
+    public void sendProductEmail(String receiver, String productName, double productPrice) throws MessagingException {
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+
+        helper.setTo(receiver);
+        helper.setSubject("Factura de compra");
+        String filepath;
+        try {
+            filepath = pdfService.createBillPDF(productName, productPrice);
+            MimeMultipart multipart = new MimeMultipart();
+            MimeBodyPart attachment = new MimeBodyPart();
+            attachment.attachFile(filepath);
+            multipart.addBodyPart(attachment);
+            msg.setContent(multipart);
+        } catch (IOException e) {
+            msg.setText("Lo sentimos, el archivo no se ha podido enviar.");
+        } catch (DocumentException e) {
+            msg.setText("Error en la factura.");
+        }
         javaMailSender.send(msg);
     }
 }

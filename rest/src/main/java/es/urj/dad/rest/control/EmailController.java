@@ -28,7 +28,6 @@ public class EmailController {
 	
 	@Autowired private EmailService emailService;
 	@Autowired private PDFService pdfService;
-	@Autowired private CSVService csvService; 
     
     @GetMapping("/file")
     public void segundaPrueba() throws MessagingException, FileNotFoundException, DocumentException {
@@ -75,7 +74,23 @@ public class EmailController {
 		catch (MailException e)  {
 			return ResponseEntity.badRequest().body("Error, dirección de correo incorrecta."); 
 		} catch (MessagingException e) {
-			return ResponseEntity.badRequest().body("Error, problema con el envío del mensaje."); 
+			return ResponseEntity.internalServerError().body("Error, problema con el envío del mensaje."); 
+		}
+	}
+
+	@PostMapping("/product")
+	public ResponseEntity<String> sendProductEmail(@RequestBody Map<String, Object> body){
+		String receiver = (String) body.get("receiver");
+		String productName = (String) body.get("productName");
+		double productPrice = (Double) body.get("productPrice");
+		try{			
+			emailService.sendProductEmail(receiver, productName, productPrice);
+			return ResponseEntity.ok().body("Email enviado");
+		}
+		catch (MailException e)  {
+			return ResponseEntity.badRequest().body("Error, dirección de correo incorrecta."); 
+		} catch (MessagingException e) {
+			return ResponseEntity.internalServerError().body("Error, problema con el envío del mensaje."); 
 		}
 	}
 }
