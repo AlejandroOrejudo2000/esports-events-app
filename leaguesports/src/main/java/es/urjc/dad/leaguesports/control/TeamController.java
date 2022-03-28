@@ -58,12 +58,12 @@ public class TeamController extends BaseController{
         return "team";
     }
 
-    @GetMapping("/nuevoequipo")
+    @GetMapping("/private/equipo/crear")
     public String newTeam(){
         return "createteam";
     }
 
-    @PostMapping("/equipo/nuevo")
+    @PostMapping("/private/equipo/nuevo")
     public String addTeam(Model model, Team team){
     
         String username = model.getAttribute("user_name").toString();
@@ -76,13 +76,13 @@ public class TeamController extends BaseController{
         return "teamcreated";
     }
 
-    @GetMapping("/equipo/{id}/borrar")
+    @GetMapping("/private/equipo/{id}/borrar")
     public String deleteTeam(@PathVariable long id){
         teamService.removeTeam(id);
         return "redirect:/equipos";
     }
 
-    @GetMapping("/equipo/{id}/editar")
+    @GetMapping("/private/equipo/{id}/actualizar")
     public String editPlayer(Model model, @PathVariable long id){
         Optional<Team> team = teamService.getTeamById(id);
         if(team.isPresent()) {
@@ -91,7 +91,7 @@ public class TeamController extends BaseController{
         return "updateteam";
     }
 
-    @PostMapping("/equipo/{id}/actualizar")
+    @PostMapping("/private/equipo/{id}/modificado")
     public String updateTeam(@PathVariable long id, Team team){
 
         teamService.updateTeam(id, team);

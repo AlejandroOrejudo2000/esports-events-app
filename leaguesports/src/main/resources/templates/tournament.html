@@ -11,12 +11,14 @@
         {{#tournament.participants}}
             <li>
                 <a href="/equipo/{{id}}">{{teamName}}</a>    
-                <a href="/torneo/{{tournament.id}}/borrarequipo/{{id}}"> - Eliminar </a>
+                {{#user_admin}}
+                <a href="/private/torneo/{{tournament.id}}/borrar/equipo/{{id}}"> - Eliminar </a>
+                {{/user_admin}}
             </li>
         {{/tournament.participants}}
     </ul>
-
-    <form action="/torneo/{{tournament.id}}/añadirparticipante" method="post">
+    {{#user_admin}}
+    <form action="/private/torneo/{{tournament.id}}/nuevo/equipo" method="post">
 		<label for="nuevoparticipante">Añadir participante</label>
         <select name="participantId" id="nuevoparticipante">
             {{#nonparticipants}}
@@ -26,6 +28,7 @@
 		<input type='submit' value='Enviar'/>
         <input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
+    {{/user_admin}}
 </div>
 <div id="matches">
     <h2>Partidos</h2>
@@ -45,12 +48,14 @@
             <td><a href="/equipo/{{visitorTeam.id}}">{{visitorTeam.teamName}}</a></td>
             <td>{{gameResults}}</td>
             <td>{{gameDate}}</td>
-            <td><a href="/torneo/{{tournament.id}}/borrarpartido/{{number}}">Eliminar</a></td> 
+            {{#user_admin}}
+            <td><a href="/private/torneo/{{tournament.id}}/borrar/partido/{{number}}">Eliminar</a></td> 
+            {{/user_admin}}
         </tr>
         {{/games}}
     </table>
-
-    <form action="/torneo/{{tournament.id}}/añadirpartido" method="post">
+    {{#user_admin}}
+    <form action="/private/torneo/{{tournament.id}}/nuevo/partido" method="post">
 		<label for="equipo1">Equipo 1</label>
         <select name="localTeamId" id="equipo1">
             {{#tournament.participants}}
@@ -68,12 +73,13 @@
 		<input type='submit' value='Enviar'/>
         <input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
+    {{/user_admin}}
 </div>
 <nav>
 	<div class="control">
         <a href="/torneos">Volver a la lista de torneos</a>
-        <a href="/torneo/{{tournament.id}}/csv">Recibir tabla de partidos</a>
-        <a href="/torneo/{{tournament.id}}/borrar">Borrar torneo</a>
+        {{#user_logged}}<a href="/private/torneo/{{tournament.id}}/csv">Recibir tabla de partidos</a>{{/user_logged}}
+        {{#user_admin}}<a href="/private/torneo/{{tournament.id}}/borrar">Borrar torneo</a>{{/user_admin}}
 	</div>
 </nav>
 

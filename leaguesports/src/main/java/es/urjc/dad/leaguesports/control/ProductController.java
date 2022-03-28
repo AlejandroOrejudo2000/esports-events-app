@@ -44,12 +44,12 @@ public class ProductController extends BaseController{
         return "product";    
     }
 
-    @GetMapping("/nuevoproducto")
+    @GetMapping("/private/producto/crear")
     public String newProduct(){
         return "createproduct";
     }
 
-    @PostMapping("/producto/nuevo")
+    @PostMapping("/private/producto/nuevo")
     public String addProduct(Model model, Product product){
     	
         productService.addProduct(product);
@@ -57,7 +57,7 @@ public class ProductController extends BaseController{
         return "productcreated";
     }
 
-    @GetMapping("/producto/{id}/borrar")
+    @GetMapping("/private/producto/{id}/borrar")
     public String deleteProduct(@PathVariable long id){
     	
         productService.removeProduct(id);

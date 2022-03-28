@@ -60,12 +60,12 @@ public class PlayerController extends BaseController{
         return "player";    
     }
 
-    @GetMapping("/nuevojugador")
+    @GetMapping("/private/jugador/crear")
     public String newPlayer(){
         return "createplayer";
     }
 
-    @PostMapping("/jugador/nuevo")
+    @PostMapping("/private/jugador/nuevo")
     public String addPlayer(Model model, Player player){
       
         playerService.addPlayer(player);
@@ -73,26 +73,26 @@ public class PlayerController extends BaseController{
         return "playercreated";
     }
 
-    @GetMapping("/jugador/{id}/borrar")
+    @GetMapping("/private/jugador/{id}/borrar")
     public String deleteTeam(@PathVariable long id){
         playerService.removePlayer(id);
         return "redirect:/jugadores";
     }
 
-    @PostMapping("/jugador/{id}/equipo")
+    @PostMapping("/private/jugador/{id}/nuevo/equipo")
     public String setTeam(@PathVariable long id, long teamId){
 
         playerService.setPlayerTeam(id, teamId);
         return "redirect:/jugador/{id}";
     }
 
-    @GetMapping("/jugador/{id}/eliminarequipo")
+    @GetMapping("/private/jugador/{id}/borrar/equipo")
     public String removeTeam(@PathVariable long id) {
         playerService.removePlayerTeam(id);
         return "redirect:/jugador/{id}";
     }
 
-    @GetMapping("/jugador/{id}/editar")
+    @GetMapping("/private/jugador/{id}/actualizar")
     public String editPlayer(Model model, @PathVariable long id){
         Optional<Player> player = playerService.getPlayerById(id);
         if(player.isPresent()) {
@@ -101,7 +101,7 @@ public class PlayerController extends BaseController{
         return "updatePlayer";
     }
 
-    @PostMapping("/jugador/{id}/actualizar")
+    @PostMapping("/private/jugador/{id}/modificado")
     public String updatePlayer(@PathVariable long id, Player player){
 
         playerService.updatePlayer(id, player);

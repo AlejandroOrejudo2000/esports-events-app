@@ -48,8 +48,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
             .antMatchers("/style/**", "/images/**").permitAll()
             .antMatchers("/", "/login", "/loginerror", "/logout").permitAll()
             .antMatchers("/torneos", "/equipos", "/jugadores").permitAll()
-            .antMatchers("/torneo/*", "/equipo/*", "/jugador/*", "/usuario/*").permitAll()
-            .anyRequest().authenticated();        
+            .antMatchers("/torneo/**", "/equipo/**", "/jugador/**", "/usuario/**").permitAll()
+            .antMatchers("/productos", "/producto/**").hasAnyRole(UserRoles.User.toString())
+            .antMatchers("/private/equipo/**", "/private/torneo/*/csv", "/profile").hasAnyRole(UserRoles.User.toString())
+            .anyRequest().hasAnyRole(UserRoles.Admin.toString());        
 
         http
             .formLogin().loginPage("/login")

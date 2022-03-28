@@ -14,11 +14,11 @@
 {{#player.team}}
     <a href="/equipo/{{id}}">{{teamName}}</a>
     {{#isOwner}}
-        <a href="/jugador/{{player.id}}/eliminarequipo"> - Eliminar equipo</a>
+        <a href="/private/jugador/{{player.id}}/borrar/equipo"> - Eliminar equipo</a>
     {{/isOwner}}    
 {{/player.team}}
 {{^player.team}}{{#user_logged}}
-    <form action="/jugador/{{player.id}}/equipo" method="post">
+    <form action="/private/jugador/{{player.id}}/nuevo/equipo" method="post">
         <select name="teamId" id="playerTeam">
             {{#teams}}
                 <option value="{{id}}">{{teamName}}</option>
@@ -32,9 +32,9 @@
     
 <nav>
 	<div class="control">
-        {{#user_admin}}<a href="/jugador/{{player.id}}/editar">Editar jugador</a>{{/user_admin}}
+        {{#user_admin}}<a href="/private/jugador/{{player.id}}/actualizar">Editar jugador</a>{{/user_admin}}
         <a href="/jugadores">Volver a la lista de jugadores</a>
-        {{#user_admin}}<a href="/jugador/{{player.id}}/borrar">Eliminar jugador</a>{{/user_admin}}      
+        {{#user_admin}}<a href="/private/jugador/{{player.id}}/borrar">Eliminar jugador</a>{{/user_admin}}      
 	</div>
      
 </nav>

@@ -21,8 +21,6 @@ public class BaseController {
         if (userPrincipal != null){
             model.addAttribute("user_logged", true);
             model.addAttribute("user_name", userPrincipal.getName());
-            System.out.println(request.isUserInRole(UserRoles.Organizer.toString()));
-            model.addAttribute("user_organizer", request.isUserInRole(UserRoles.Organizer.toString()));
             model.addAttribute("user_admin", request.isUserInRole(UserRoles.Admin.toString()));
         }
         else {

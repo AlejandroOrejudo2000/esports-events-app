@@ -8,7 +8,7 @@
 
 <nav>
 	<div class="control">
-        <a href="/producto/{{product.id}}/borrar">Eliminar producto</a>
+        {{#user_admin}}<a href="/private/producto/{{product.id}}/borrar">Eliminar producto</a>{{/user_admin}}
         <a href="/productos">Volver a la lista de productos</a>
 	</div>
 </nav>

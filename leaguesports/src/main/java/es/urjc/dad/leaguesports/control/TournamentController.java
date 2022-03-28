@@ -63,7 +63,7 @@ public class TournamentController extends BaseController{
         return "tournament";
     }
 
-    @GetMapping("/torneo/{id}/csv")
+    @GetMapping("/private/torneo/{id}/csv")
     public String receiveTournamentTable(Model model, HttpServletRequest request, @PathVariable long id) {
         Optional<Tournament> tournament = tournamentService.getTournamentById(id);
         if(tournament.isPresent()) {
@@ -79,12 +79,12 @@ public class TournamentController extends BaseController{
         return "redirect:/torneos";
     }
 
-    @GetMapping("/nuevotorneo")
+    @GetMapping("/private/torneo/crear")
     public String newTournament(){
         return "createtournament";
     }
 
-    @PostMapping("/torneo/nuevo")
+    @PostMapping("/private/torneo/nuevo")
     public String addTournament(Model model, String tournamentName, String startDate, String endDate){   
 
         try{
@@ -97,13 +97,13 @@ public class TournamentController extends BaseController{
         }          
     }
 
-    @PostMapping("/torneo/{id}/añadirparticipante")
+    @PostMapping("/private/torneo/{id}/nuevo/equipo")
     public String addParticipant(long participantId, @PathVariable long id){
         tournamentService.addParticipant(id, participantId);
         return "redirect:/torneo/{id}";
     }
 
-    @PostMapping("/torneo/{id}/añadirpartido")
+    @PostMapping("/private/torneo/{id}/nuevo/partido")
     public String addGame(long localTeamId, long visitorTeamId, String gameDate, @PathVariable long id){
 
         try{
@@ -116,19 +116,19 @@ public class TournamentController extends BaseController{
         } 
     }
 
-    @GetMapping("/torneo/{id}/borrarequipo/{teamid}")
+    @GetMapping("/private/torneo/{id}/borrar/equipo/{teamid}")
     public String removeParticipant(@PathVariable long id, @PathVariable long teamid) {
         tournamentService.removeParticipant(id, teamid);
         return "redirect:/torneo/{id}";
     }
 
-    @GetMapping("/torneo/{id}/borrarpartido/{gameid}")
+    @GetMapping("/private/torneo/{id}/borrar/partido/{gameid}")
     public String removeGame(@PathVariable long id, @PathVariable long gameid) {
         tournamentService.removeGameInTournament(id, gameid);
         return "redirect:/torneo/{id}";
     }
 
-    @GetMapping("torneo/{id}/borrar")
+    @GetMapping("/private/torneo/{id}/borrar")
     public String removeTournament(@PathVariable long id){
         tournamentService.removeTournament(id);
         return "redirect:/torneos";

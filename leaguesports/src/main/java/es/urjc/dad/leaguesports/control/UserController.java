@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/usuario/nuevo")
-    public String addUser(Model model, String userName, String password, String email, String organizer, String admin){
+    public String addUser(Model model, String userName, String password, String email, String admin){
     	
         if (!userService.checkIfUserExists(userName)){
             User user = new User(userName, encoder.encode(password), email);
@@ -40,8 +40,6 @@ public class UserController {
 
             emailService.SendRegisterEmail(email, userName);
 
-            System.out.println(organizer);
-            if(organizer != null) user.addRole(UserRoles.Organizer);
             if(admin != null) user.addRole(UserRoles.Admin);
             userService.addUser(user);
             return "redirect:/";
@@ -57,7 +55,6 @@ public class UserController {
             Optional<User> u = userService.getUserbyName(userPrincipal.getName().toString());
             model.addAttribute("user_logged", true);
             model.addAttribute("user_name", userPrincipal.getName());
-            model.addAttribute("user_organizer", request.isUserInRole(UserRoles.Organizer.toString()));
             model.addAttribute("user_admin", request.isUserInRole(UserRoles.Admin.toString()));
             if(u.isPresent()){                
                 model.addAttribute("email", u.get().getEmail());
