@@ -1,0 +1,168 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: Leaguesports API
+  description: API simple para envio de correos relacionados con la aplicacion web leaguesports
+servers:
+  - url: http://localhost:8080/
+paths:
+  /email/registration:
+    post:
+      description: Envía un correo de bienvenida
+      requestBody:
+        required: true
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                receiver:
+                  type: string
+                username:
+                  type: string
+      responses:
+        '200':
+          description: Correo enviado correctamente
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Petición incorrecta
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /email/event:
+    post:
+      description: Envía un correo de inscripción a un torneo
+      requestBody:
+        required: true
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                receiver:
+                  type: string
+                username:
+                  type: string
+                eventName:
+                  type: string
+                eventId:
+                  type: integer
+      responses:
+        '200':
+          description: Correo enviado correctamente
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Petición incorrecta
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /email/product:
+    post:
+      description: Envía un correo con una factura de compra de un producto en formato pdf
+      requestBody:
+        required: true
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                receiver:
+                  type: string
+                productName:
+                  type: string
+                productPrice:
+                  type: number
+      responses:
+        '200':
+          description: Correo enviado correctamente
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Petición incorrecta
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /email/gametable:
+    post:
+      description: Envía un correo con una tabla de partidos en formato csv
+      requestBody:
+        required: true
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                receiver:
+                  type: string
+                games:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      number:
+                        type: integer
+                      localteam:
+                        type: string
+                      visitorteam:
+                        type: string
+                      date:
+                        type: string
+                      results:
+                        type: string
+      responses:
+        '200':
+          description: Correo enviado correctamente
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Petición incorrecta
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Error del servidor
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
