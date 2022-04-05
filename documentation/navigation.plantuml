@@ -6,7 +6,7 @@ package "Secciones"{
     component ListaDeEquipos as eqplist
     component ListaDejugadores as juglist    
     component ListaDeProductos as prodlist
-    component Registrarse as reg
+    component [Login/Profile] as login    
 }
 
 component Torneo as trn
@@ -27,7 +27,9 @@ component productoCreado as prodcreado
 component EditarJugador as editjug
 component EditarEquipo as editeqp
 
+component register as reg
 
+login <--> reg
 trnlist <--> trn
 trnlist --> creartrn
 creartrn --> trncreado

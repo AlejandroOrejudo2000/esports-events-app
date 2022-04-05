@@ -1,0 +1,13 @@
+@startuml components
+package "Control"{
+    component EmailController as emailctrl
+}
+package "Service"{
+    component EmailService as email
+    component PDFService as pdf
+    component CSVService as csv
+}
+
+emailctrl --> email
+email --> pdf
+email --> csv

@@ -16,5 +16,6 @@ tr }o-- gm
 gm ||-- tm
 gm ||-- tm
 us }o-- pr
+us }o-- tm
 
 @enduml

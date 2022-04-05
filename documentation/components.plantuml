@@ -6,6 +6,7 @@ package "Control"{
     component TeamController as teamctrl
     component TournamentController as tourctrl
     component UserController as userctrl
+    component LoginController as logctrl
 }
 
 package "Service"{
@@ -15,6 +16,7 @@ package "Service"{
     component TeamService as teamserv
     component TournamentService as tourserv
     component UserService as userserv
+    component EmailService as emailserv
 }
 
 package "Repository"{
@@ -26,12 +28,22 @@ package "Repository"{
     component UserRepository as userrep
 }
 
+package "Security"{
+    component SecurityConfigurer as Securitycomponent 
+    component CSRFHandlerAdapter as csrf
+}
+
 playerctrl --> playerserv
 playerctrl --> teamserv
 teamctrl --> teamserv
 prodctrl --> prodserv
+prodctrl --> emailserv
 tourctrl --> tourserv
+tourctrl --> emailserv
+tourctrl --> userserv
 userctrl --> userserv
+userctrl --> emailserv
+logctrl --> userserv
 
 playerserv --> playerrep
 playerserv --> teamserv
@@ -40,6 +52,7 @@ teamserv --> teamrep
 tourserv --> tourrep
 tourserv--> gamerep
 tourserv --> teamserv
+
 userserv --> userrep
 
 
