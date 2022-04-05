@@ -9,10 +9,10 @@ Aplicación web para gestionar elementos relacionados con __eventos de e-sports_
 - [Diagrama de clases](#diagrama-de-clases-uml)
 - [Diagrama de modelo de datos](#diagrama-de-modelo-de-datos)
 - [Instrucciones de ejecución](#instrucciones-de-ejecución)
-- - [Instrucciones de empaquetado](#instruccioned-de-empaquetado)
+- [Instrucciones de empaquetado](#instrucciones-de-empaquetado)
 - [Instrucciones de ejecución](#instrucciones-de-ejecución)
 
-
+- [Documentación del API rest](documentation/leaguesportsAPI.yaml)
 ---
 ## Entidades:
 
@@ -36,24 +36,24 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 ### Secciones principales (públicas)
 
 - ___Pantalla principal:___ Pantalla inicial de la web. Desde ella se puede acceder al resto de secciones principales: ___torneos___, ___equipos___, ___jugadores___ y ___productos___, además del ___registro de usuarios___. 
-
 ![Principal](/documentation/pantallas/principal.PNG)
 
-- ___Lista de torneos:___ Muestra la lista de torneos y añade un enlace a la pantalla de creación de torneo. Permite navegar a la página de detalles de un torneo pulsando sobre él.
+- ___Login:___ Pantalla de acceso a la parte privada de la web.
+![Login](/documentation/pantallas/login.PNG)
 
+- ___Registro:___ Pantalla de registro de usuarios. Se debe introducir un usuario, contraseña, correo válido y marcar si el usuario es administrador de la página.
+![Registro](/documentation/pantallas/registro.PNG)
+
+- ___Lista de torneos:___ Muestra la lista de torneos y añade un enlace a la pantalla de creación de torneo (Admin*). Permite navegar a la página de detalles de un torneo pulsando sobre él.
 ![Torneos](/documentation/pantallas/torneos.PNG)
 
-- ___Lista de equipos:___ Muestra la lista de equipos y añade un enlace a la pantalla de creación de equipo. Permite navegar a la página de detalles de un equipo pulsando sobre el nombre del mismo.
-
+- ___Lista de equipos:___ Muestra la lista de equipos y añade un enlace a la pantalla de creación de equipo (Usuario*). Permite navegar a la página de detalles de un equipo pulsando sobre el nombre del mismo.
 ![Equipos](/documentation/pantallas/equipos.PNG)
 
-- ___Lista de jugadores:___ Muestra la lista de jugadores y añade un enlace a la pantalla de creación de jugador. Permite navegar a la página de detalles de un jugador pulsando sobre el nickname del mismo.
-
+- ___Lista de jugadores:___ Muestra la lista de jugadores y añade un enlace a la pantalla de creación de jugador (Admin*). Permite navegar a la página de detalles de un jugador pulsando sobre el nickname del mismo.
 ![Jugadores](/documentation/pantallas/jugadores.PNG)
 
-- ___Lista de productos:___ Muestra la lista de productos y añade un enlace a la pantalla de creación de producto. Permite navegar a la página de detalles de un producto pulsando sobre el nombre del mismo.
 
-![Productos](/documentation/pantallas/productos.PNG)
 
 ### Secciones de detalles (públicas)
 
@@ -69,11 +69,21 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 
 ![Jugador](/documentation/pantallas/jugador.PNG)
 
-- ___Detalles de producto:___ Muestra el nombre y precio del producto seleccionado. También incluye la opción de borrar el producto, que será privada.
+### Secciones de perfil, creación, actualización y productos (privadas)
+
+- ___Perfil de usuario:___ Muestra los detalles del usuario (nombre, correo y roles).
+![Perfil](/documentation/pantallas/perfil.PNG)
+
+- ___Pantalla de error de login:___ Muestra un error en usuario o contraseña en el login.
+![Logerror](/documentation/pantallas/logerror.PNG)
+
+- ___Lista de productos:___ Muestra la lista de productos y añade un enlace a la pantalla de creación de producto. Permite navegar a la página de detalles de un producto pulsando sobre el nombre del mismo.
+
+![Productos](/documentation/pantallas/productos.PNG)
+
+- ___Detalles de producto:___ Muestra el nombre y precio del producto seleccionado, además de la opción de comprarlo. También incluye la opción de borrar el producto (Admin*).
 
 ![Producto](/documentation/pantallas/producto.PNG)
-
-### Secciones de creación y actualización (privadas)
 
 - ___Creación de torneo:___ Muestra un formulario para crear un nuevo torneo con un nombre y unas fechas de inicio y fin. Al enviar el formulario se creará el torneo y se cargará una página que permite ver el torneo creado o volver a la lista de torneos.
 
@@ -91,17 +101,19 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 
 ![CrearProducto](/documentation/pantallas/crearproducto.PNG) ![ProductoCreado](/documentation/pantallas/productocreado.PNG)
 
-- ___Registro de usuarios:___ Muestra un formulario para crear un nuevo usuario con un nombre y una contraseña. Al enviar el formulario se creará el usuario y se volverá a la pantalla principal. Esta sección será reemplazada por un sistema de registro y login de usuarios.
-
-![CrearUsuario](/documentation/pantallas/crearusuario.PNG)
-
 ---
 ## Diagrama de navegación
 ![DiagramaER](/documentation/diagramas/navegacion.png)
 
 ---
 ## Diagrama de clases UML
+
+Diagrama de clases de la aplicación web
 ![DiagramaUML](/documentation/diagramas/components.png)
+
+Diagrama de clases del servicio interno
+
+![DiagramaUMLAPI](/documentation/diagramas/components_rest.PNG)
 
 ## Diagrama de modelo de datos
 ### Diagrama E/R
