@@ -1,7 +1,6 @@
-package es.urj.dad.rest.control;
+package es.urjc.dad.rest.control;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,16 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itextpdf.text.DocumentException;
 
-import es.urj.dad.rest.service.CSVService;
-import es.urj.dad.rest.service.EmailService;
-import es.urj.dad.rest.service.PDFService;
+import es.urjc.dad.rest.service.EmailService;
 
 @RestController
 @RequestMapping("/email")
 public class EmailController {
 	
 	@Autowired private EmailService emailService;
-	@Autowired private PDFService pdfService;
     
     @GetMapping("/file")
     public void segundaPrueba() throws MessagingException, FileNotFoundException, DocumentException {

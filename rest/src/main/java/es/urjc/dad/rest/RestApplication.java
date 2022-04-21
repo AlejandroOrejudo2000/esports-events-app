@@ -1,4 +1,4 @@
-package es.urj.dad.rest;
+package es.urjc.dad.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

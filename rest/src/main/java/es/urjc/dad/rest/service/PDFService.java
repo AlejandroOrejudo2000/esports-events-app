@@ -1,4 +1,4 @@
-package es.urj.dad.rest.service;
+package es.urjc.dad.rest.service;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

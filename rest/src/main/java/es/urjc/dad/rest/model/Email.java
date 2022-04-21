@@ -1,4 +1,4 @@
-package es.urj.dad.rest.model;
+package es.urjc.dad.rest.model;
 
 public class Email {
 
