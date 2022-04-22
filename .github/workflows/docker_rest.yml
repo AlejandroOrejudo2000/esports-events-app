@@ -3,6 +3,8 @@ name: Build Docker Image for Rest
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'rest/**'
   pull_request:
     branches: [ main ]
 
