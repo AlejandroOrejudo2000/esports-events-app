@@ -1,0 +1,18 @@
+name: Build Docker Image for Web App
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'rest/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - id: step1
+      run: echo ${{ secrets.PAT }} | docker login ghcr.io -u alejandroorejudo2000 --password-stdin 
+    - id: step2
+      run: docker build -t ghcr.io/alejandroorejudo2000/leaguesports-webapp ./leaguesports
+    - id: step3
+      run: docker push hcr.io/alejandroorejudo2000/leaguesports-webapp
