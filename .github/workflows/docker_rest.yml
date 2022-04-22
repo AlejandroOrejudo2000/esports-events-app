@@ -5,17 +5,14 @@ on:
     branches: [ main ]
     paths:
       - 'rest/**'
-  pull_request:
-    branches: [ main ]
-
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build ./rest --tag my-image-name:$(date +%s)
-
+    - id: step1
+      run: echo ${{ secrets.PAT }} | docker login ghcr.io -u alejandroorejudo2000 --password-stdin 
+    - id: step2
+      run: docker build -t ghcr.io/alejandroorejudo2000/leaguesports-rest ./rest
+    - id: step3
+      run: docker push hcr.io/alejandroorejudo2000/leaguesports-rest
