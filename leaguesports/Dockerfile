@@ -8,7 +8,7 @@ RUN mvn -B -o package
 FROM openjdk:11-jdk-slim
 WORKDIR /usr/src/app/
 COPY --from=builder project/target/*.jar /usr/src/app/
-EXPOSE 8080
-ENTRYPOINT exec java -jar rest-0.0.1-SNAPSHOT.jar
+EXPOSE 8443
+ENTRYPOINT exec java -jar leaguesports-0.0.1-SNAPSHOT.jar
 # For Spring-Boot project, use the entrypoint below to reduce Tomcat startup time.
 #ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar pruebas.jar
