@@ -4,7 +4,8 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'rest/**'
+      - 'leaguesports/**'
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,4 +16,4 @@ jobs:
     - id: step2
       run: docker build -t ghcr.io/alejandroorejudo2000/leaguesports-webapp ./leaguesports
     - id: step3
-      run: docker push hcr.io/alejandroorejudo2000/leaguesports-webapp
+      run: docker push ghcr.io/alejandroorejudo2000/leaguesports-webapp
