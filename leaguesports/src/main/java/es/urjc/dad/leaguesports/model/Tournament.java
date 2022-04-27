@@ -18,7 +18,7 @@ import javax.persistence.GenerationType;
 public class Tournament{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
