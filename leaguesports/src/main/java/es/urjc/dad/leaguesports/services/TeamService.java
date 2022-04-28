@@ -72,4 +72,8 @@ public class TeamService {
             teamRepository.save(updatedTeam);
         }       
     }
+
+    public boolean hasAnyTeam(){
+        return teamRepository.count() > 0;
+    }
 }

@@ -40,4 +40,8 @@ public class ProductService {
         }            
     }
 
+    public boolean hasAnyProduct(){
+        return productRepository.count() > 0;
+    }
+
 }

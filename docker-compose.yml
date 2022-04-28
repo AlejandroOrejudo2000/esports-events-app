@@ -11,7 +11,6 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
 
-
   app:
     build:
       context: ./leaguesports
@@ -24,7 +23,6 @@ services:
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
-      #DDL_AUTO: create 
-
+      DDL_AUTO: create 
 volumes:
   dbdata:

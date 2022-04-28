@@ -40,33 +40,45 @@ public class DataBaseInitializer {
     private void initDatabase()
     {
 
-        for(int i = 0; i < NUM_USERS; i++) {
-            User user = new User("User"+i, encoder.encode("pass"), DEFAULT_EMAIL);
-            user.addRole(UserRoles.User);
-        	userService.addUser(user);
-            for (int j = 0; j < TEAMS_PER_USER; j++) {
-                Team team = new Team("Team " + (j + i * TEAMS_PER_USER), new Random().nextInt(20));
-                team.setUser(user);
-                teamService.addTeam(team);
-                teams[j+i*TEAMS_PER_USER] = team;
-            }
-        } 
-
-        for(int i = 0; i < NUM_PLAYERS; i++) {
-            Player player = new Player("Nombre " + i, "Apellido " + i, "Nickname " + i, i % 2 == 0? "Hombre":"Mujer", i % 10 + 20, "España");
-            player.setTeam(teams[new Random().nextInt(NUM_USERS * TEAMS_PER_USER)]);
-            playerService.addPlayer(player);
-        }      
-        
-        for(int i = 0; i < NUM_TOURNAMENTS; i++){
-            tournamentService.addTournament(new Tournament("Torneo " + i, new Date(), new Date()));
+        boolean teamInitalized = teamService.hasAnyTeam();
+        if(!userService.hasAnyUser())
+        {
+            for(int i = 0; i < NUM_USERS; i++) {
+                User user = new User("User"+i, encoder.encode("pass"), DEFAULT_EMAIL);
+                user.addRole(UserRoles.User);
+                userService.addUser(user);
+                
+                if(!teamInitalized){
+                    for (int j = 0; j < TEAMS_PER_USER; j++) {
+                        Team team = new Team("Team " + (j + i * TEAMS_PER_USER), new Random().nextInt(20));
+                        team.setUser(user);
+                        teamService.addTeam(team);
+                        teams[j+i*TEAMS_PER_USER] = team;
+                    }
+                }
+                
+            } 
         }
-
-        for(int i = 0; i < NUM_PRODUCTS; i++) {
-        	productService.addProduct(new Product("Producto prueba " + i, i * 10));
-        }     
-
         
-
+        if(!playerService.hasAnPlayer())
+        {
+            for(int i = 0; i < NUM_PLAYERS; i++) {
+                Player player = new Player("Nombre " + i, "Apellido " + i, "Nickname " + i, i % 2 == 0? "Hombre":"Mujer", i % 10 + 20, "España");
+                player.setTeam(teams[new Random().nextInt(NUM_USERS * TEAMS_PER_USER)]);
+                playerService.addPlayer(player);
+            }  
+        }
+        
+        if(!tournamentService.hasAnyTournament()){
+            for(int i = 0; i < NUM_TOURNAMENTS; i++){
+                tournamentService.addTournament(new Tournament("Torneo " + i, new Date(), new Date()));
+            }
+        }
+        
+        if(!productService.hasAnyProduct()){
+            for(int i = 0; i < NUM_PRODUCTS; i++) {
+                productService.addProduct(new Product("Producto prueba " + i, i * 10));
+            }    
+        } 
     }
 }
