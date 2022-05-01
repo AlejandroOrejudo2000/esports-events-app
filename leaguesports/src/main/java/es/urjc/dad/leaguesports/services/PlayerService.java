@@ -68,7 +68,10 @@ public class PlayerService {
 
         updatedPlayer.setId(id);
         playerRepository.save(updatedPlayer);
-
     }   
+
+    public boolean hasAnPlayer(){
+        return playerRepository.count() > 0;
+    }
 
 }

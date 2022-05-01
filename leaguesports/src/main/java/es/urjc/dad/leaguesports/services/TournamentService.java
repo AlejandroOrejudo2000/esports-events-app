@@ -164,4 +164,8 @@ public class TournamentService {
         }        
     }
 
+    public boolean hasAnyTournament(){
+        return tournamentRepository.count() > 0;
+    }
+
 }

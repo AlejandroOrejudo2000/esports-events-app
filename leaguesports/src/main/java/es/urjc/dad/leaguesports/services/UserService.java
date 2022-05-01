@@ -53,5 +53,9 @@ public class UserService implements UserDetailsService{
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), roles);
    
     }
+
+    public boolean hasAnyUser(){
+        return userRepository.count() > 0;
+    }
     
 }
