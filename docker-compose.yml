@@ -12,9 +12,7 @@ services:
       - dbdata:/var/lib/mysql
 
   app:
-    build:
-      context: ./leaguesports
-      dockerfile: Dockerfile
+    image: ghcr.io/alejandroorejudo2000/leaguesports-webapp:latest
     restart: always
     depends_on:
       - db
