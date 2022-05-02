@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Player {
     
@@ -32,6 +34,7 @@ public class Player {
     @Column
     private String nationality;
 
+    @JsonIgnore
     @ManyToOne
     private Team team;
 
