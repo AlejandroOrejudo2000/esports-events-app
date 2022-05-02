@@ -43,13 +43,13 @@ public class PlayerController extends BaseController{
     @GetMapping("/jugador/{id}")
     public String showPlayerDetails(Model model, HttpServletRequest request, @PathVariable long id) {
 
-        Optional<Player> player = playerService.getPlayerById(id);
-        if(player.isPresent()) {
+        Player player = playerService.getPlayerById(id);
+        if(player != null) {
             Boolean isOwner = false;
             Principal userPrincipal = request.getUserPrincipal();            
-            model.addAttribute("player", player.get());  
+            model.addAttribute("player", player);
             if (userPrincipal != null){
-                Team team = player.get().getTeam();
+                Team team = player.getTeam();
                 if (team != null && team.getUser().getUserName().equals(userPrincipal.getName())){
                     isOwner = true;
                 }
@@ -94,11 +94,11 @@ public class PlayerController extends BaseController{
 
     @GetMapping("/private/jugador/{id}/actualizar")
     public String editPlayer(Model model, @PathVariable long id){
-        Optional<Player> player = playerService.getPlayerById(id);
-        if(player.isPresent()) {
-            model.addAttribute("player", player.get());
+        Player player = playerService.getPlayerById(id);
+        if(player != null) {
+            model.addAttribute("player", player);
         }
-        return "updatePlayer";
+        return "updateplayer";
     }
 
     @PostMapping("/private/jugador/{id}/modificado")

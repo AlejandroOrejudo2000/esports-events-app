@@ -12,7 +12,9 @@ services:
       - dbdata:/var/lib/mysql
 
   app:
-    image: ghcr.io/alejandroorejudo2000/leaguesports-webapp:latest
+    build:
+      context: ./leaguesports
+      dockerfile: Dockerfile
     restart: always
     depends_on:
       - db
@@ -24,6 +26,7 @@ services:
       MYSQL_PORT: 3306
       DDL_AUTO: create 
       REST_HOST: rest
+
   rest:
     image: ghcr.io/alejandroorejudo2000/leaguesports-rest:latest
 
