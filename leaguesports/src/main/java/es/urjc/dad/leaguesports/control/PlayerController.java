@@ -98,7 +98,7 @@ public class PlayerController extends BaseController{
         if(player.isPresent()) {
             model.addAttribute("player", player.get());
         }
-        return "updatePlayer";
+        return "updateplayer";
     }
 
     @PostMapping("/private/jugador/{id}/modificado")
