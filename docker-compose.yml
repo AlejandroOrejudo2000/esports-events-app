@@ -20,7 +20,7 @@ services:
       - db
       - rest
     ports:
-      - 8081:8443
+      - 8443:8443
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
