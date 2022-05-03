@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234 
+      MYSQL_DATABASE: db_leaguesports
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  app:
+    build:
+      context: ./leaguesports
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+      - rest
+    ports:
+      - 8443:8443
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      DDL_AUTO: create 
+      REST_HOST: rest
+
+  rest:
+    image: ghcr.io/alejandroorejudo2000/leaguesports-rest:latest
+
+volumes:
+  dbdata:

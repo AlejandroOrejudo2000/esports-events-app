@@ -1,5 +1,8 @@
 version: "3.8"
 
+networks:
+  leaguesports:
+
 services:
   db:
     image: mysql:latest
@@ -10,8 +13,10 @@ services:
       MYSQL_DATABASE: db_leaguesports
     volumes:
       - dbdata:/var/lib/mysql
+    networks:
+      - leaguesports
 
-  app:
+  web1:
     build:
       context: ./leaguesports
       dockerfile: Dockerfile
@@ -19,16 +24,46 @@ services:
     depends_on:
       - db
       - rest
-    ports:
-      - 8443:8443
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
       DDL_AUTO: create 
       REST_HOST: rest
+    networks:
+      - leaguesports
 
+  web2:
+    build:
+      context: ./leaguesports
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+      - rest
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      REST_HOST: rest
+    networks:
+      - leaguesports
+
+  loadbalancer:
+    image: haproxy:latest
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - 8443:8443
+      - 8080:8080
+    depends_on:
+      - web1
+      - web2
+    networks:
+      - leaguesports
+      
   rest:
     image: ghcr.io/alejandroorejudo2000/leaguesports-rest:latest
+    networks:
+      - leaguesports
 
 volumes:
   dbdata:
