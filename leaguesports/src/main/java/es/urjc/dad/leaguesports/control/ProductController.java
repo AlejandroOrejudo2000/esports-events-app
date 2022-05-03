@@ -49,9 +49,9 @@ public class ProductController extends BaseController{
     @GetMapping("/producto/{id}")
     public String showProductDetails(Model model, @PathVariable long id) {
 
-        Optional<Product> product = productService.getProductById(id);
-        if(product.isPresent()) {
-            model.addAttribute("product", product.get());                            
+        Product product = productService.getProductById(id);
+        if(product != null) {
+            model.addAttribute("product", product);                            
         }      
         return "product";    
     }
@@ -78,14 +78,14 @@ public class ProductController extends BaseController{
 
     @GetMapping("producto/{id}/comprar")
     public String buyProduct(Model model, HttpServletRequest request, @PathVariable long id){
-        Optional<Product> product = productService.getProductById(id);
-        if(product.isPresent()){
+    	Product product = productService.getProductById(id);
+        if(product != null) {
             Principal userPrincipal = request.getUserPrincipal();
             if(userPrincipal != null){
                 Optional<User> u = userService.getUserbyName(userPrincipal.getName().toString());
                 if(u.isPresent()){
                     String email = u.get().getEmail();
-                    emailService.sendProductEmail(email, product.get());
+                    emailService.sendProductEmail(email, product);
                     productService.removeProduct(id);
                 }
             }

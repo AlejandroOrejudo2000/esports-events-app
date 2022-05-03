@@ -18,6 +18,7 @@ public class CacheController {
     public Map<Object, Object> getCacheContent(){
         ConcurrentMapCacheManager manager = (ConcurrentMapCacheManager) cacheManager;
         ConcurrentMapCache cache = (ConcurrentMapCache) manager.getCache("players");    
+        //ConcurrentMapCache cache = (ConcurrentMapCache) manager.getCache("products");    
         return cache.getNativeCache();
     }
 }

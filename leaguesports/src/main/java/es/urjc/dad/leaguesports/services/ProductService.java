@@ -9,21 +9,31 @@ import org.springframework.stereotype.Service;
 import es.urjc.dad.leaguesports.model.Product;
 import es.urjc.dad.leaguesports.repositories.ProductRepository;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+
 @Service
+@CacheConfig
 public class ProductService {
 
     @Autowired private ProductRepository productRepository;
 
+    @Cacheable(cacheNames = "products", key = "#page")
     public Page<Product> getAllProducts(Pageable page){
 
         Page<Product> products = productRepository.findAll(page);
         return products;
     }
 
-    public Optional<Product> getProductById(long id){
+    public Product getProductById(long id){
 
         Optional<Product> product = productRepository.findById(id);
-        return product;
+        
+        if(product.isPresent())
+            return product.get();
+        else
+            return null;
     }
 
     public void addProduct(Product product) {
@@ -31,6 +41,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    @CacheEvict(cacheNames = "products")
     public void removeProduct(long id) {
 
         Optional<Product> product = productRepository.findById(id);
