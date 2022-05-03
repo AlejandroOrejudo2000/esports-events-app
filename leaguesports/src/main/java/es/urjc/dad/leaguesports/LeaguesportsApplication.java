@@ -29,8 +29,8 @@ public class LeaguesportsApplication {
 		Config config = new Config();
 		JoinConfig joinConfig = config.getNetworkConfig().getJoin();
 
-		joinConfig.getMulticastConfig().setEnabled(false);
-		joinConfig.getTcpIpConfig().setEnabled(true)
+		joinConfig.getMulticastConfig().setEnabled(true);
+		joinConfig.getTcpIpConfig().setEnabled(false)
 			.setMembers(Collections.singletonList("127.0.0.1"));
 
 		return config;

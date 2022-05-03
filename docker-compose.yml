@@ -48,12 +48,12 @@ services:
       - leaguesports
 
   loadbalancer:
-    image: haproxy:latest
+    image: haproxy:2.1
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     ports:
       - 8443:8443
-      - 8080:8080
+      - 8084:8084
     depends_on:
       - web1
       - web2
