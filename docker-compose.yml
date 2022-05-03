@@ -54,8 +54,8 @@ services:
       - web1
       - web2
     networks:
-      - leaguesports
-      
+      - leaguesports      
+
   rest:
     image: ghcr.io/alejandroorejudo2000/leaguesports-rest:latest
     networks:
