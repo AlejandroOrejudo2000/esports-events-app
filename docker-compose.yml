@@ -21,12 +21,12 @@ services:
     restart: always
     depends_on:
       - db
-      - rest
+      - restloadbalancer
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
       DDL_AUTO: create # solo primer despliegue
-      REST_HOST: rest
+      REST_HOST: restloadbalancer
     networks:
       - leaguesports
 
@@ -35,18 +35,18 @@ services:
     restart: always
     depends_on:
       - db
-      - rest
+      - restloadbalancer
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
-      REST_HOST: rest
+      REST_HOST: restloadbalancer
     networks:
       - leaguesports
 
   loadbalancer:
     image: haproxy:2.1
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./haproxy/haproxy-web.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     ports:
       - 8443:8443
       - 8084:8084
@@ -56,10 +56,27 @@ services:
     networks:
       - leaguesports      
 
-  rest:
+  rest1:
     image: ghcr.io/alejandroorejudo2000/leaguesports-rest:latest
     networks:
       - leaguesports
+
+  rest2:
+    image: ghcr.io/alejandroorejudo2000/leaguesports-rest:latest
+    networks:
+      - leaguesports
+  
+  restloadbalancer:
+    image: haproxy:2.1
+    volumes:
+      - ./haproxy/haproxy-rest.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - 8085:8084
+    depends_on:
+      - rest1
+      - rest2
+    networks:
+      - leaguesports 
 
 volumes:
   dbdata:
