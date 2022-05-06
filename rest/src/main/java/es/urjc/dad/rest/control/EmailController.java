@@ -24,11 +24,6 @@ import es.urjc.dad.rest.service.EmailService;
 public class EmailController {
 	
 	@Autowired private EmailService emailService;
-    
-    @GetMapping("/file")
-    public void segundaPrueba() throws MessagingException, FileNotFoundException, DocumentException {
-    	emailService.sendEmailWithAttachment();
-    }
 
 	@PostMapping("/registration")
 	public ResponseEntity<String> sendRegistrationEmail(@RequestBody Map<String, Object> body){

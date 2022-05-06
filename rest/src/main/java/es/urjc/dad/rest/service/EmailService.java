@@ -32,31 +32,6 @@ public class EmailService {
 	@Autowired private JavaMailSender javaMailSender;
     @Autowired private CSVService csvService;
     @Autowired private PDFService pdfService;
-	
-    public void sendEmailWithAttachment() throws MessagingException, FileNotFoundException, DocumentException {
-        
-        MimeMessage msg = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-        
-        helper.setTo("wanas74285@f1xm.com");
-        
-        helper.setSubject("Prueba 2 correo Spring Boot");
-        helper.setText("Email with file \n Spring Boot Email");
-            
-        String filepath;
-        try {
-            filepath = pdfService.createPDF("Prueba");
-            MimeMultipart multipart = new MimeMultipart();
-            MimeBodyPart attachment = new MimeBodyPart();
-            attachment.attachFile(filepath);
-            multipart.addBodyPart(attachment);
-            msg.setContent(multipart);
-        } catch (IOException e) {
-            msg.setText("Lo sentimos, el archivo no se ha podido enviar.");
-        }
-
-        javaMailSender.send(msg);
-    }
 
     public void sendRegistrationEmail(String receiver, String name) throws MailException {
         
