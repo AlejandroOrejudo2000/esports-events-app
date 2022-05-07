@@ -2,10 +2,10 @@ package es.urjc.dad.leaguesports.control;
 
 import java.util.Map;
 
+import com.hazelcast.spring.cache.HazelcastCacheManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.concurrent.ConcurrentMapCache;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,9 +16,7 @@ public class CacheController {
 
     @GetMapping("/cache")
     public Map<Object, Object> getCacheContent(){
-        ConcurrentMapCacheManager manager = (ConcurrentMapCacheManager) cacheManager;
-        ConcurrentMapCache cache = (ConcurrentMapCache) manager.getCache("players");    
-        //ConcurrentMapCache cache = (ConcurrentMapCache) manager.getCache("products");    
-        return cache.getNativeCache();
+        HazelcastCacheManager manager = (HazelcastCacheManager) cacheManager;
+        return manager.getHazelcastInstance().getMap("players");
     }
 }

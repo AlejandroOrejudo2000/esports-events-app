@@ -1,17 +1,17 @@
 package es.urjc.dad.leaguesports;
 
-import java.util.Collections;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;
+import com.hazelcast.config.MapConfig;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.spring.cache.HazelcastCacheManager;
 
-import org.apache.commons.logging.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
 
@@ -30,16 +30,19 @@ public class LeaguesportsApplication {
 		JoinConfig joinConfig = config.getNetworkConfig().getJoin();
 
 		joinConfig.getMulticastConfig().setEnabled(true);
-		joinConfig.getTcpIpConfig().setEnabled(false)
-
-			.setMembers(Collections.singletonList("127.0.0.1"));
-
+		joinConfig.getTcpIpConfig().setEnabled(false);
+		config.addMapConfig(new MapConfig().setName("players"));
 		return config;
 	}
 
 	@Bean
-	public CacheManager cacheManager(){
-		return new ConcurrentMapCacheManager("players");
+	public HazelcastInstance hazelcastInstance(Config config){
+		return Hazelcast.newHazelcastInstance(config);
+	}
+
+	@Bean
+	public CacheManager cacheManager(HazelcastInstance hazelcastInstance){
+		return new HazelcastCacheManager(hazelcastInstance);
 	}
 
 }

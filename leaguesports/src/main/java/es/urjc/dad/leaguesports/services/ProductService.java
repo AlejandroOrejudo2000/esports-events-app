@@ -19,7 +19,7 @@ public class ProductService {
 
     @Autowired private ProductRepository productRepository;
 
-    @Cacheable(cacheNames = "products", key = "#page")
+    //@Cacheable(cacheNames = "products", key = "#page")
     public Page<Product> getAllProducts(Pageable page){
 
         Page<Product> products = productRepository.findAll(page);
@@ -41,7 +41,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    @CacheEvict(cacheNames = "products")
+    //@CacheEvict(cacheNames = "products")
     public void removeProduct(long id) {
 
         Optional<Product> product = productRepository.findById(id);

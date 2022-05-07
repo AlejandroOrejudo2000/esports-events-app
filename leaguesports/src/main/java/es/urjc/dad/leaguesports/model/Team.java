@@ -1,6 +1,7 @@
 package es.urjc.dad.leaguesports.model;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 
 @Entity
-public class Team {
+public class Team implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

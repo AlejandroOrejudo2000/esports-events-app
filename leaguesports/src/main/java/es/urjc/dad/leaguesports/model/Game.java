@@ -1,5 +1,6 @@
 package es.urjc.dad.leaguesports.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @IdClass(GameId.class)
-public class Game {
+public class Game implements Serializable {
     
     @Id
     @ManyToOne
