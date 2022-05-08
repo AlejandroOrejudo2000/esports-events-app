@@ -26,10 +26,10 @@ public class EmailService {
 
     @Autowired Environment environment; 
 
-    private final String REGISTER_EMAIL_URL = "/email/registration";
-    private final String EVENT_EMAIL_URL = "/email/event";
-    private final String GAMETABLE_EMAIL_URL = "/email/gametable";
-    private final String PRODUCT_EMAIL_URL = "/email/product";
+    private final String REGISTER_EMAIL_URL = "/user/registration";
+    private final String EVENT_EMAIL_URL = "/tournament/inscription";
+    private final String GAMETABLE_EMAIL_URL = "/tournament/schedule";
+    private final String PRODUCT_EMAIL_URL = "/product/purchase";
 
     public void SendRegisterEmail(String receiverEmail, String username){
 

@@ -16,11 +16,14 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 import com.itextpdf.text.DocumentException;
 
 @Service
+@EnableAsync
 public class EmailService {
 	
     private final String REGISTRATION_SUBJECT = "¡Bienvenido a Leaguesports!";
@@ -33,6 +36,7 @@ public class EmailService {
     @Autowired private CSVService csvService;
     @Autowired private PDFService pdfService;
 
+    @Async
     public void sendRegistrationEmail(String receiver, String name) throws MailException {
         
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -43,6 +47,7 @@ public class EmailService {
         javaMailSender.send(msg);
     }
 
+    @Async
     public void sendEventEmail(String receiver, String name, String eventName, long eventId){
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(receiver);
@@ -63,6 +68,7 @@ public class EmailService {
         return MessageFormat.format(EVENT_CONTENT, params);	
     }
 
+    @Async
     public void sendGameTableEmail(String receiver, List<Map<String, Object>> games) throws MessagingException {
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
@@ -86,6 +92,7 @@ public class EmailService {
         javaMailSender.send(msg);
     }
 
+    @Async
     public void sendProductEmail(String receiver, String productName, double productPrice) throws MessagingException {
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);

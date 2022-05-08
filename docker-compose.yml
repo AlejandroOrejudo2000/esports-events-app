@@ -64,11 +64,17 @@ services:
 
   rest1:
     image: ghcr.io/alejandroorejudo2000/leaguesports-rest:latest
+    # build:
+    #   context: ./rest
+    #   dockerfile: Dockerfile
     networks:
       - leaguesports
 
   rest2:
     image: ghcr.io/alejandroorejudo2000/leaguesports-rest:latest
+    # build:
+    #   context: ./rest
+    #   dockerfile: Dockerfile
     networks:
       - leaguesports
   
