@@ -11,6 +11,7 @@ Aplicación web para gestionar elementos relacionados con __eventos de e-sports_
 - [Instrucciones de ejecución](#instrucciones-de-ejecución)
 - [Instrucciones de empaquetado](#instrucciones-de-empaquetado)
 - [Instrucciones de ejecución](#instrucciones-de-ejecución)
+- [Arquitectura de la aplicación](#arquitectura-de-la-aplicación)
 
 - [Documentación del API rest](documentation/leaguesportsAPI.yaml)
 ---
@@ -162,3 +163,7 @@ Con todo instalado, abrimos dos terminales para poder ejecutar tanto la aplicaci
 > java -jar rest-0.0.1-SNAPSHOT.jar <br>
 
 (La aplicación puede generar ficheros así que es conveniente guardar los dos ejecutables en una carpeta y ejecutarlos desde ahi).
+
+## Arquitectura de la aplicación
+
+![DiagramaArquitectura](/documentation/diagramas/diagramaArquitectura.png)
