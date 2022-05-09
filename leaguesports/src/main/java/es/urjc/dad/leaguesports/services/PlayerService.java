@@ -35,13 +35,14 @@ public class PlayerService {
         else
             return null;
     }
-
+    
+    @CacheEvict(cacheNames = "players", allEntries = true)
     public void addPlayer(Player player) {
 
         playerRepository.save(player);
     }
 
-    @CacheEvict(cacheNames = "players")
+    @CacheEvict(cacheNames = "players", allEntries = true)
     public void removePlayer(long id) {
 
         Optional<Player> player = playerRepository.findById(id);
@@ -80,7 +81,7 @@ public class PlayerService {
             return null;             
     }
 
-    @Cacheable(cacheNames = "players", key = "#page")
+    @CacheEvict(cacheNames = "players", allEntries = true)
     public Player updatePlayer(long id, Player updatedPlayer) {
 
         updatedPlayer.setId(id);
