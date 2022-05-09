@@ -1,8 +1,11 @@
 # Leaguesports
 
-## Vídeo demostración de la aplicación final:
+## Vídeo demostración de la aplicación final
 
 https://youtu.be/B52XKeUU5g0
+
+---
+## Descripción de la aplicación
 
 Aplicación web para gestionar elementos relacionados con __eventos de e-sports__. Se podrá acceder de forma pública a información de partidos, entradas, resultados, eventos, jugadores y equipos, noticias sobre eventos y merchandising. 
 
@@ -16,10 +19,10 @@ Aplicación web para gestionar elementos relacionados con __eventos de e-sports_
 - [Instrucciones de empaquetado](#instrucciones-de-empaquetado)
 - [Instrucciones de ejecución](#instrucciones-de-ejecución)
 - [Arquitectura de la aplicación](#arquitectura-de-la-aplicación)
-
 - [Documentación del API rest](documentation/leaguesportsAPI.yaml)
+
 ---
-## Entidades:
+## Entidades
 
 - __Jugador:__ Miembro de un equipo definido por un nombre, ID de jugador, edad, etc.
 - __Equipo:__ Conjunto de jugadores con un nombre, país e ID de equipo.
@@ -27,8 +30,10 @@ Aplicación web para gestionar elementos relacionados con __eventos de e-sports_
 - __Torneo:__ Conjunto de partidos con un nombre, fecha de inicio, número de edición y premio.
 - __Producto:__ Elemento con un código, precio y comprador. Puede ser una entrada y tener un partido asignado.
 - __Usuario:__ Permite crear un perfil para comprar productos y recibir notificaciones. Los usuarios administradores podrán hacer cambios en los equipos, jugadores, etc. e informar al resto de usuarios.
+
 ---
-## Servicio interno:
+## Servicio interno
+
 Los usuarios administradores, al modificar información relativa a equipos, partidos, jugadores, etc. notificarán al resto de usuarios acerca del cambio por medio de un correo electrónico. 
 
 Los usuarios reciben información mediante un correo electrónico tras realizar una compra de un producto. 
@@ -41,21 +46,27 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 ### Secciones principales (públicas)
 
 - ___Pantalla principal:___ Pantalla inicial de la web. Desde ella se puede acceder al resto de secciones principales: ___torneos___, ___equipos___, ___jugadores___ y ___productos___, además del ___registro de usuarios___. 
+
 ![Principal](/documentation/pantallas/principal.PNG)
 
 - ___Login:___ Pantalla de acceso a la parte privada de la web.
+
 ![Login](/documentation/pantallas/login.PNG)
 
 - ___Registro:___ Pantalla de registro de usuarios. Se debe introducir un usuario, contraseña, correo válido y marcar si el usuario es administrador de la página.
+
 ![Registro](/documentation/pantallas/registro.PNG)
 
 - ___Lista de torneos:___ Muestra la lista de torneos y añade un enlace a la pantalla de creación de torneo (Admin*). Permite navegar a la página de detalles de un torneo pulsando sobre él.
+
 ![Torneos](/documentation/pantallas/torneos.PNG)
 
 - ___Lista de equipos:___ Muestra la lista de equipos y añade un enlace a la pantalla de creación de equipo (Usuario*). Permite navegar a la página de detalles de un equipo pulsando sobre el nombre del mismo.
+
 ![Equipos](/documentation/pantallas/equipos.PNG)
 
 - ___Lista de jugadores:___ Muestra la lista de jugadores y añade un enlace a la pantalla de creación de jugador (Admin*). Permite navegar a la página de detalles de un jugador pulsando sobre el nickname del mismo.
+
 ![Jugadores](/documentation/pantallas/jugadores.PNG)
 
 
@@ -77,9 +88,11 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 ### Secciones de perfil, creación, actualización y productos (privadas)
 
 - ___Perfil de usuario:___ Muestra los detalles del usuario (nombre, correo y roles).
+
 ![Perfil](/documentation/pantallas/perfil.PNG)
 
 - ___Pantalla de error de login:___ Muestra un error en usuario o contraseña en el login.
+
 ![Logerror](/documentation/pantallas/logerror.PNG)
 
 - ___Lista de productos:___ Muestra la lista de productos y añade un enlace a la pantalla de creación de producto. Permite navegar a la página de detalles de un producto pulsando sobre el nombre del mismo.
@@ -108,15 +121,17 @@ A continuación se muestran las pantallas principales de la aplicación web: Las
 
 ---
 ## Diagrama de navegación
+
 ![DiagramaER](/documentation/diagramas/navegacion.png)
 
 ---
 ## Diagrama de clases UML
 
-Diagrama de clases de la aplicación web
+- ___Diagrama de clases de la aplicación web___
+
 ![DiagramaUML](/documentation/diagramas/components.png)
 
-Diagrama de clases del servicio interno
+- ___Diagrama de clases del servicio interno___
 
 ![DiagramaUMLAPI](/documentation/diagramas/components_rest.PNG)
 
@@ -129,6 +144,7 @@ Diagrama de clases del servicio interno
 
 ## Instrucciones de empaquetado
 
+Para empaquetar hay que realizar los siguientes pasos:
 - instalar JDK 11 o superior: https://www.oracle.com/es/java/technologies/javase/jdk11-archive-downloads.html
 - Configurar la variable de entorno JAVA_HOME e incluir la carpeta bin en el path
 - Descargar y descomprimir maven: https://maven.apache.org/download.cgi
