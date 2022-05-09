@@ -1,5 +1,9 @@
 # Leaguesports
 
+## Vídeo demostración de la aplicación final:
+
+https://youtu.be/B52XKeUU5g0
+
 Aplicación web para gestionar elementos relacionados con __eventos de e-sports__. Se podrá acceder de forma pública a información de partidos, entradas, resultados, eventos, jugadores y equipos, noticias sobre eventos y merchandising. 
 
 - [Entidades](#entidades)
